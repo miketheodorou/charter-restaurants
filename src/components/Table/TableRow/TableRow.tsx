@@ -14,7 +14,7 @@ const TableRow: FC<Props> = ({ restaurant }: Props) => {
       <td>{city}</td>
       <td>{state}</td>
       <td>{telephone}</td>
-      <td>{genre}</td>
+      <td className='genres'>{genre}</td>
       <td>{attire}</td>
     </tr>
   );

@@ -1,7 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 
+:root {
+  --color-light-grey: #f4f4f4;
+  --color-dark-grey: #222222;
+  --color-blue: #005be7;
+}
+
+html {
+  height: 100vh;
+}
+
 body {
+  height: calc(100% - 3em);
   margin: 0;
+  padding: 1.5em;
   font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -1,0 +1,44 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+  position: relative;
+
+  &__header {
+    background-color: var(--color-light-grey);
+    th {
+      font-size: 1em;
+      font-weight: bold;
+      padding: 0.85em 1.15em;
+    }
+  }
+
+  thead {
+    position: sticky;
+    top: 0;
+  }
+
+  thead,
+  tbody {
+    display: block;
+  }
+
+  tr {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+
+    th,
+    td {
+      color: var(--color-dark-grey);
+    }
+
+    td {
+      padding: 1.15em;
+      font-size: 0.8rem;
+
+      &:last-child {
+        padding-right: 0.6em;
+      }
+    }
+  }
+}
