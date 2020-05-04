@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.scss';
 
+import { getRestaurants } from './api/restaurantApi';
+
 function App() {
+  const [restaurants, setRestaurants] = useState([]);
+
+  useEffect(() => {
+    getRestaurants()
+      .then((res) => res.json())
+      .then(setRestaurants)
+      .catch(console.error);
+  }, []);
   return (
     <div className='App'>
       <header className='App-header'>
