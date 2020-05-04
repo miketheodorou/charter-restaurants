@@ -1,0 +1,15 @@
+.table {
+  &__row {
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    position: relative;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    td {
+      text-align: left;
+    }
+  }
+}
