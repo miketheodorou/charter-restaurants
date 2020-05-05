@@ -16,11 +16,12 @@ const TablePagination: FC<Props> = (props) => {
   return (
     <div className='pagination'>
       <div className='pagination__counts'>
-        <span className='start'>{start}</span>
-        <span className='divider'>-</span>
-        <span className='end'>{end}</span>
+        <span className='count start'>{start}</span>
+        <span className='dash'>-</span>
+        <span className='count end'>{end}</span>
         <span className='of'>of</span>
-        <span className='total'>{totalItems}</span>
+        <span className='count total'>{totalItems} </span>
+        <span className='results'>results</span>
       </div>
       <div className='pagination__controls'>
         <button

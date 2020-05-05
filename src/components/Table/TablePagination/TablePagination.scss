@@ -3,5 +3,30 @@
   align-items: center;
   &__counts {
     margin-right: 0.8em;
+
+    .of {
+      margin: 0 0.4em;
+      font-size: 0.9rem;
+    }
+
+    .of,
+    .results {
+      font-size: 0.9rem;
+    }
+  }
+
+  &__controls {
+    display: flex;
+
+    .control {
+      padding: 0.4em 0.8em;
+      margin: 0 0.4em;
+      background: transparent;
+      border: none;
+      color: var(--color-blue-7);
+      font-weight: bold;
+      font-size: 0.5rem;
+      cursor: pointer;
+    }
   }
 }
