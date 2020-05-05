@@ -11,10 +11,7 @@ function App() {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    getRestaurants()
-      .then((res) => res.json())
-      .then(setRestaurants)
-      .catch(console.error);
+    getRestaurants().then(setRestaurants).catch(console.error);
   }, []);
   return (
     <section className='restaurants'>
