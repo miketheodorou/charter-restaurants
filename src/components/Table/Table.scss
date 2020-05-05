@@ -1,7 +1,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 800px;
+  min-width: 1200px;
   position: relative;
   background-color: #fff;
   border-radius: inherit;
@@ -35,7 +35,7 @@
 
   tr {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: 1fr 200px 175px 150px 1fr 150px;
 
     td {
       padding: 1.15em;
@@ -46,7 +46,6 @@
     td,
     th {
       text-align: left;
-      min-width: 150px;
 
       &.state {
         text-align: center;
