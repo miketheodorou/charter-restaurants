@@ -4,9 +4,10 @@ import { Restaurant } from '../../models/Restaurant.model';
 import TableRow from './TableRow/TableRow';
 import { RestaurantContext } from '../../context/RestaurantContext/RestaurantContext';
 import TablePagination from './TablePagination/TablePagination';
+import { Pagination } from '../../models/Pagination.model';
 
 const Table: FC = () => {
-  const { state } = useContext(RestaurantContext);
+  const { state, pageChanged } = useContext(RestaurantContext);
   const { restaurants, filteredRestaurants, filters, pagination } = state;
   const [results, setResults] = useState<Restaurant[]>([]);
 
@@ -16,19 +17,12 @@ const Table: FC = () => {
     ));
   };
 
-  const parsePages = (
-    restaurants: Restaurant[],
-    pagination: { page: number; pageSize: number; totalItems: number }
-  ) => {
+  const parsePages = (restaurants: Restaurant[], pagination: Pagination) => {
     const { page, pageSize } = pagination;
     const start = Math.floor((page - 1) * 10);
     const end = Math.floor(start + pageSize);
     const pageSlice = restaurants.slice(start, end);
     setResults(pageSlice);
-  };
-
-  const onPageChanged = (page: number) => {
-    console.log(page);
   };
 
   useEffect(() => {
@@ -51,10 +45,7 @@ const Table: FC = () => {
         <tbody>{renderRestaurants(results)}</tbody>
       </table>
       <footer className='table__footer'>
-        <TablePagination
-          pagination={pagination}
-          onPageChanged={onPageChanged}
-        />
+        <TablePagination pagination={pagination} onPageChanged={pageChanged} />
       </footer>
     </>
   );
