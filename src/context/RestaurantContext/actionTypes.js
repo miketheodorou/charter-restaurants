@@ -7,3 +7,6 @@ export const FILTER_APPLIED = 'FILTER_APPLIED';
 
 // Pagination
 export const PAGE_CHANGED = 'PAGE_CHANGED';
+
+// Search
+export const ON_SEARCH = 'ON_SEARCH';

@@ -12,7 +12,7 @@ import Filters from '../components/Filters/Filters';
 import Table from '../components/Table/Table';
 
 const Dashboard = () => {
-  const { fetchRestaurantsSuccess } = useContext(RestaurantContext);
+  const { fetchRestaurantsSuccess, search } = useContext(RestaurantContext);
 
   useEffect(() => {
     getRestaurants().then(fetchRestaurantsSuccess).catch(console.error);
@@ -22,6 +22,9 @@ const Dashboard = () => {
     <section className='restaurants'>
       <div className='restaurants__search'>
         <Filters />
+        <button onClick={search} className='search-button'>
+          Search
+        </button>
       </div>
       <div className='restaurants__results'>
         <Table />

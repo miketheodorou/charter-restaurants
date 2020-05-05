@@ -2,7 +2,7 @@ import React, { useReducer, createContext, Dispatch } from 'react';
 import { Restaurant } from '../../models/Restaurant.model';
 
 // Action Types
-import { FETCH_SUCCESS, FETCH_ERROR, PAGE_CHANGED } from './actionTypes';
+import { FETCH_SUCCESS, PAGE_CHANGED, ON_SEARCH } from './actionTypes';
 import { Pagination } from '../../models/Pagination.model';
 
 interface Action {
@@ -16,6 +16,7 @@ interface RestaurantContextProps {
       state: string | null;
       genre: string | null;
       searchTerm: string;
+      attire: string | null;
     };
     pagination: Pagination;
     restaurants: Restaurant[];
@@ -24,6 +25,7 @@ interface RestaurantContextProps {
   dispatch: Dispatch<Action>;
   fetchRestaurantsSuccess: (restaurants: Restaurant[]) => void;
   pageChanged: (page: number) => void;
+  search: () => void;
 }
 
 export const RestaurantContext = createContext({} as RestaurantContextProps);
@@ -32,7 +34,7 @@ const initialState = {
   filters: {
     state: null,
     genre: null,
-    searchTerm: '',
+    name: '',
   },
   pagination: {
     page: 1,
@@ -49,6 +51,8 @@ const reducer = (state = initialState, { type, payload }: Action) => {
       return { ...state, ...payload };
     case PAGE_CHANGED:
       return { ...state, pagination: payload };
+    case ON_SEARCH:
+      return { ...state, filteredRestaurants: payload };
     default:
       return state;
   }
@@ -74,11 +78,32 @@ export const RestaurantProvider = ({ children }: any) => {
     dispatch({ type: PAGE_CHANGED, payload: pagination });
   };
 
+  const search = () => {
+    // remove empty keys to prevent unnecessary iterations
+    const filters = { ...state.filters };
+    Object.keys(state.filters).forEach(
+      (key) => !filters[key] && delete filters[key]
+    );
+
+    // go through everyfilter and test them against the matching object keys
+    const results = state.restaurants.filter((restaurant: any) => {
+      let isMatch = false;
+      Object.keys(filters).forEach((key: any) => {
+        const regex = RegExp(`${filters[key]}`, 'gi');
+        isMatch = regex.test(restaurant[key]);
+      });
+      return isMatch;
+    });
+
+    dispatch({ type: ON_SEARCH, payload: results });
+  };
+
   const value = {
     state,
     dispatch,
     fetchRestaurantsSuccess,
     pageChanged,
+    search,
   };
 
   return (

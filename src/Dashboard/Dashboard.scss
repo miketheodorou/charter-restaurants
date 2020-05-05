@@ -6,7 +6,21 @@
   margin: 0 auto;
 
   &__search {
-    min-height: 8em;
+    // min-height: 8em;
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    .search-button {
+      background-color: var(--color-blue-7);
+      border: none;
+      color: #fff;
+      border-radius: 3px;
+      margin-left: 0.8em;
+      padding: 0.6em 1em;
+      cursor: pointer;
+    }
   }
 
   &__results {
