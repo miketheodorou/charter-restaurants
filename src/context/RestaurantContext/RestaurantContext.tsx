@@ -2,7 +2,8 @@ import React, { useReducer, createContext, Dispatch } from 'react';
 import { Restaurant } from '../../models/Restaurant.model';
 
 // Action Types
-import { FETCH_SUCCESS, FETCH_ERROR } from './actionTypes';
+import { FETCH_SUCCESS, FETCH_ERROR, PAGE_CHANGED } from './actionTypes';
+import { Pagination } from '../../models/Pagination.model';
 
 interface Action {
   type: string;
@@ -15,9 +16,10 @@ interface RestaurantContextProps {
       state: string | null;
       genre: string | null;
       searchTerm: string;
-      page: number;
     };
+    pagination: Pagination;
     restaurants: Restaurant[];
+    filteredRestaurants: Restaurant[];
   };
   dispatch: Dispatch<Action>;
   fetchRestaurantsSuccess: (restaurants: Restaurant[]) => void;
@@ -30,15 +32,20 @@ const initialState = {
     state: null,
     genre: null,
     searchTerm: '',
+  },
+  pagination: {
     page: 1,
+    pageSize: 10,
+    totalPages: 1,
   },
   restaurants: [],
+  filteredRestaurants: [],
 };
 
 const reducer = (state = initialState, { type, payload }: Action) => {
   switch (type) {
     case FETCH_SUCCESS:
-      return { ...state, restaurants: payload };
+      return { ...state, ...payload };
     default:
       return state;
   }
@@ -48,7 +55,19 @@ export const RestaurantProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const fetchRestaurantsSuccess = (restaurants: Restaurant[]): void => {
-    dispatch({ type: FETCH_SUCCESS, payload: restaurants });
+    const filteredRestaurants = restaurants;
+    const pagination = {
+      page: 1,
+      pageSize: 10,
+      totalPages: Math.ceil(restaurants.length / 10),
+      totalItems: restaurants.length,
+    };
+    const payload = { restaurants, filteredRestaurants, pagination };
+    dispatch({ type: FETCH_SUCCESS, payload });
+  };
+
+  const pageChanged = (page: number) => {
+    const pagination = { ...state.pagination, page };
   };
 
   const value = {

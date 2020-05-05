@@ -2,6 +2,8 @@
   display: grid;
   grid-template-rows: auto 1fr;
   grid-gap: 1.5em;
+  max-width: 1600px;
+  margin: 0 auto;
 
   &__search {
     min-height: 8em;
