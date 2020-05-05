@@ -1,10 +1,10 @@
 import React from 'react';
 
 // Context
-import { RestaurantProvider } from './context/RestaurantContext/RestaurantContext';
+import { RestaurantProvider } from '../context/RestaurantContext/RestaurantContext';
 
 // Custom Components
-import Dashboard from './Dashboard/Dashboard';
+import Dashboard from '../Dashboard/Dashboard';
 
 function App() {
   return (
