@@ -19,6 +19,8 @@
       font-size: 1rem;
       font-weight: bold;
       padding: 0.85em 1.15em;
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
     }
   }
 
@@ -34,10 +36,7 @@
     td {
       padding: 1.15em;
       font-size: 0.85rem;
-
-      &:last-child {
-        padding-right: 0.6em;
-      }
+      text-transform: capitalize;
     }
 
     td,
@@ -47,6 +46,10 @@
 
       &.state {
         text-align: center;
+      }
+
+      &:last-child {
+        padding-right: 0.6em;
       }
     }
   }

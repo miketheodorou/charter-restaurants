@@ -1,25 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import './App.scss';
+import React from 'react';
 
-// API
-import { getRestaurants } from './api/restaurantApi';
+// Context
+import { RestaurantProvider } from './context/RestaurantContext/RestaurantContext';
 
 // Custom Components
-import Table from './components/Table/Table';
+import Dashboard from './Dashboard/Dashboard';
 
 function App() {
-  const [restaurants, setRestaurants] = useState([]);
-
-  useEffect(() => {
-    getRestaurants().then(setRestaurants).catch(console.error);
-  }, []);
   return (
-    <section className='restaurants'>
-      <div className='restaurants__search'></div>
-      <div className='restaurants__table'>
-        <Table restaurants={restaurants} />
-      </div>
-    </section>
+    <RestaurantProvider>
+      <Dashboard />
+    </RestaurantProvider>
   );
 }
 
