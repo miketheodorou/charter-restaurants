@@ -6,6 +6,10 @@
   background-color: #fff;
   border-radius: inherit;
 
+  &__container {
+    overflow-x: auto;
+  }
+
   thead {
     position: sticky;
     top: 0;

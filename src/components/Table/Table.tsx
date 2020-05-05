@@ -31,19 +31,21 @@ const Table: FC = () => {
 
   return (
     <>
-      <table className='table'>
-        <thead>
-          <tr>
-            <th className='name'>Name</th>
-            <th className='city'>City</th>
-            <th className='state'>State</th>
-            <th className='phone'>Phone</th>
-            <th className='genres'>Genres</th>
-            <th className='attire'>Attire</th>
-          </tr>
-        </thead>
-        <tbody>{renderRestaurants(results)}</tbody>
-      </table>
+      <div className='table__container'>
+        <table className='table'>
+          <thead>
+            <tr>
+              <th className='name'>Name</th>
+              <th className='city'>City</th>
+              <th className='state'>State</th>
+              <th className='phone'>Phone</th>
+              <th className='genres'>Genres</th>
+              <th className='attire'>Attire</th>
+            </tr>
+          </thead>
+          <tbody>{renderRestaurants(results)}</tbody>
+        </table>
+      </div>
       <footer className='table__footer'>
         <TablePagination pagination={pagination} onPageChanged={pageChanged} />
       </footer>

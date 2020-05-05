@@ -37,6 +37,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-blue-0);
   color: var(--color-grey-9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 h1,

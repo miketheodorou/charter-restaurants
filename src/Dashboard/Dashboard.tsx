@@ -17,7 +17,7 @@ const Dashboard = () => {
   return (
     <section className='restaurants'>
       <div className='restaurants__search'></div>
-      <div className='restaurants__table'>
+      <div className='restaurants__results'>
         <Table />
       </div>
     </section>
