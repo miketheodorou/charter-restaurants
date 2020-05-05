@@ -13,14 +13,26 @@ const TablePagination: FC<Props> = (props) => {
 
   const start = (page - 1) * 10 + 1;
   const end = page * pageSize > totalItems ? totalItems : page * pageSize;
+
+  const renderCounts = () => {
+    if (totalItems > 0) {
+      return (
+        <>
+          <span className='count start'>{start}</span>
+          <span className='dash'>-</span>
+          <span className='count end'>{end}</span>
+          <span className='of'>of</span>
+        </>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className='pagination'>
       <div className='pagination__counts'>
-        <span className='count start'>{start}</span>
-        <span className='dash'>-</span>
-        <span className='count end'>{end}</span>
-        <span className='of'>of</span>
-        <span className='count total'>{totalItems} </span>
+        {renderCounts()}
+        <span className='count total'>{totalItems}</span>
         <span className='results'>results</span>
       </div>
       <div className='pagination__controls'>

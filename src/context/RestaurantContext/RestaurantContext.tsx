@@ -2,7 +2,12 @@ import React, { useReducer, createContext, Dispatch } from 'react';
 import { Restaurant } from '../../models/Restaurant.model';
 
 // Action Types
-import { FETCH_SUCCESS, PAGE_CHANGED, ON_SEARCH } from './actionTypes';
+import {
+  FETCH_SUCCESS,
+  PAGE_CHANGED,
+  ON_SEARCH,
+  FILTER_CHANGED,
+} from './actionTypes';
 import { Pagination } from '../../models/Pagination.model';
 
 interface Action {
@@ -24,6 +29,7 @@ interface RestaurantContextProps {
   };
   dispatch: Dispatch<Action>;
   fetchRestaurantsSuccess: (restaurants: Restaurant[]) => void;
+  filterChanged: (filter: string, value: string | number) => void;
   pageChanged: (page: number) => void;
   search: () => void;
 }
@@ -51,8 +57,10 @@ const reducer = (state = initialState, { type, payload }: Action) => {
       return { ...state, ...payload };
     case PAGE_CHANGED:
       return { ...state, pagination: payload };
+    case FILTER_CHANGED:
+      return { ...state, filters: payload };
     case ON_SEARCH:
-      return { ...state, filteredRestaurants: payload };
+      return { ...state, ...payload };
     default:
       return state;
   }
@@ -61,6 +69,7 @@ const reducer = (state = initialState, { type, payload }: Action) => {
 export const RestaurantProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // fetches initial list of restaurants
   const fetchRestaurantsSuccess = (restaurants: Restaurant[]): void => {
     const filteredRestaurants = restaurants;
     const pagination = {
@@ -73,35 +82,67 @@ export const RestaurantProvider = ({ children }: any) => {
     dispatch({ type: FETCH_SUCCESS, payload });
   };
 
+  // pagination for table footer
   const pageChanged = (page: number) => {
     const pagination = { ...state.pagination, page };
     dispatch({ type: PAGE_CHANGED, payload: pagination });
   };
 
+  const filterChanged = (filter: string, value: string | number) => {
+    const filters = { ...state.filters, [filter]: value || null };
+    dispatch({ type: FILTER_CHANGED, payload: filters });
+  };
+
+  // happens when search button is clicked
   const search = () => {
     // remove empty keys to prevent unnecessary iterations
     const filters = { ...state.filters };
     Object.keys(state.filters).forEach(
       (key) => !filters[key] && delete filters[key]
     );
+    const filterCount = Object.keys(filters).length;
+    if (filterCount) {
+      // go through everyfilter and test them against the matching object keys
+      const filteredRestaurants = state.restaurants.filter(
+        (restaurant: any) => {
+          let matches = 0;
+          Object.keys(filters).forEach((key: any) => {
+            const regex = RegExp(filters[key], 'gi');
+            if (regex.test(restaurant[key])) matches += 1;
+          });
+          return matches === filterCount;
+        }
+      );
 
-    // go through everyfilter and test them against the matching object keys
-    const results = state.restaurants.filter((restaurant: any) => {
-      let isMatch = false;
-      Object.keys(filters).forEach((key: any) => {
-        const regex = RegExp(`${filters[key]}`, 'gi');
-        isMatch = regex.test(restaurant[key]);
-      });
-      return isMatch;
-    });
+      const pagination = {
+        page: 1,
+        pageSize: 10,
+        totalPages: Math.ceil(filteredRestaurants.length / 10),
+        totalItems: filteredRestaurants.length,
+      };
+      const payload = { filteredRestaurants, pagination };
+      return dispatch({ type: ON_SEARCH, payload });
+    }
 
-    dispatch({ type: ON_SEARCH, payload: results });
+    // if no fields are present, do a default search and grab the original results
+    const pagination = {
+      page: 1,
+      pageSize: 10,
+      totalPages: Math.ceil(state.restaurants.length / 10),
+      totalItems: state.restaurants.length,
+    };
+    const payload = {
+      filteredRestaurants: [...state.restaurants],
+      pagination,
+    };
+    dispatch({ type: ON_SEARCH, payload });
   };
 
   const value = {
     state,
     dispatch,
     fetchRestaurantsSuccess,
+    filterChanged,
     pageChanged,
     search,
   };
