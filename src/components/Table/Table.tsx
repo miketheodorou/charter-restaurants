@@ -20,12 +20,12 @@ const Table: FC<Props> = (props) => {
     <table className='table'>
       <thead>
         <tr className='table__header'>
-          <th align='left'>Name</th>
-          <th align='left'>City</th>
-          <th align='left'>State</th>
-          <th align='left'>Phone</th>
-          <th align='left'>Genres</th>
-          <th align='left'>Attire</th>
+          <th className='name'>Name</th>
+          <th className='city'>City</th>
+          <th className='state'>State</th>
+          <th className='phone'>Phone</th>
+          <th className='genres'>Genres</th>
+          <th className='attire'>Attire</th>
         </tr>
       </thead>
       <tbody>{renderRestaurants(restaurants)}</tbody>

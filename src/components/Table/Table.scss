@@ -40,5 +40,15 @@
         padding-right: 0.6em;
       }
     }
+
+    td,
+    th {
+      text-align: left;
+      min-width: 150px;
+
+      &.state {
+        text-align: center;
+      }
+    }
   }
 }

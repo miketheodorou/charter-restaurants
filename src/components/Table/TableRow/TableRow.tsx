@@ -10,11 +10,11 @@ const TableRow: FC<Props> = ({ restaurant }: Props) => {
   const { name, city, state, telephone, genre, attire } = restaurant;
   return (
     <tr className='table__row'>
-      <td>{name}</td>
-      <td>{city}</td>
-      <td>{state}</td>
-      <td>{telephone}</td>
-      <td className='genres'>{genre}</td>
+      <td className='name'>{name}</td>
+      <td className='city'>{city}</td>
+      <td className='state'>{state}</td>
+      <td className='phone'>{telephone}</td>
+      <td className='genres'>{genre.replace(/,/g, ', ')}</td>
       <td>{attire}</td>
     </tr>
   );
