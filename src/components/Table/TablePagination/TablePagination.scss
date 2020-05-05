@@ -1,0 +1,7 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  &__counts {
+    margin-right: 0.8em;
+  }
+}
