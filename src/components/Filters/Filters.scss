@@ -1,0 +1,9 @@
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  &__filter:not(:last-child) {
+    margin-right: 0.8em;
+  }
+}
