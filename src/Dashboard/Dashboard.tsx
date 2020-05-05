@@ -4,8 +4,12 @@ import './Dashboard.scss';
 // API
 import { getRestaurants } from '../api/restaurantApi';
 
-import Table from '../components/Table/Table';
+// Context
 import { RestaurantContext } from '../context/RestaurantContext/RestaurantContext';
+
+// Components
+import Filters from '../components/Filters/Filters';
+import Table from '../components/Table/Table';
 
 const Dashboard = () => {
   const { fetchRestaurantsSuccess } = useContext(RestaurantContext);
@@ -16,7 +20,9 @@ const Dashboard = () => {
 
   return (
     <section className='restaurants'>
-      <div className='restaurants__search'></div>
+      <div className='restaurants__search'>
+        <Filters />
+      </div>
       <div className='restaurants__results'>
         <Table />
       </div>
