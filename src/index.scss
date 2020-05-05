@@ -1,9 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 
 :root {
-  --color-light-grey: #f4f4f4;
-  --color-dark-grey: #222222;
-  --color-blue: #005be7;
+  --color-grey-0: #f9f9fa;
+  --color-grey-1: #eceeef;
+  --color-grey-2: #dee1e3;
+  --color-grey-3: #cfd3d7;
+  --color-grey-4: #bfc5c9;
+  --color-grey-5: #adb4b9;
+  --color-grey-6: #98a1a8;
+  --color-grey-7: #7f8b93;
+  --color-grey-8: #606e79;
+  --color-grey-9: #374047;
+
+  --color-blue-0: #f6fafd;
+  --color-blue-1: #e2eff9;
+  --color-blue-2: #cce4f5;
+  --color-blue-3: #b5d8f0;
+  --color-blue-4: #9bcaeb;
+  --color-blue-5: #7dbae5;
+  --color-blue-6: #5aa7de;
+  --color-blue-7: #2d8fd5;
+  --color-blue-8: #006fbe;
+  --color-blue-8: #004170;
 }
 
 html {
@@ -17,4 +35,6 @@ body {
   font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-blue-0);
+  color: var(--color-grey-9);
 }

@@ -3,19 +3,23 @@
   border-collapse: collapse;
   min-width: 800px;
   position: relative;
-
-  &__header {
-    background-color: var(--color-light-grey);
-    th {
-      font-size: 1em;
-      font-weight: bold;
-      padding: 0.85em 1.15em;
-    }
-  }
+  background-color: #fff;
+  border-radius: inherit;
 
   thead {
     position: sticky;
     top: 0;
+    background-color: var(--color-blue-7);
+    z-index: 5;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    padding: 0.5em 0;
+    color: #fff;
+    th {
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 0.85em 1.15em;
+    }
   }
 
   thead,
@@ -27,14 +31,9 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
 
-    th,
-    td {
-      color: var(--color-dark-grey);
-    }
-
     td {
       padding: 1.15em;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
 
       &:last-child {
         padding-right: 0.6em;

@@ -19,7 +19,7 @@ const Table: FC<Props> = (props) => {
   return (
     <table className='table'>
       <thead>
-        <tr className='table__header'>
+        <tr>
           <th className='name'>Name</th>
           <th className='city'>City</th>
           <th className='state'>State</th>
