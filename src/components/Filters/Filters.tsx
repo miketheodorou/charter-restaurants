@@ -2,8 +2,11 @@ import React, { FC, useContext } from 'react';
 import './Filters.scss';
 import { states, genres } from './options';
 
-import Select from '../common/Select/Select';
+// Context
 import { RestaurantContext } from '../../context/RestaurantContext/RestaurantContext';
+
+// Components
+import Select from '../common/Select/Select';
 
 interface State {
   name: string;
