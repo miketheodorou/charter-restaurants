@@ -1,4 +1,4 @@
-import React, { useReducer, FormEvent, FC } from 'react';
+import React, { useReducer, FormEvent, FC, useEffect } from 'react';
 import './Search.scss';
 
 // Icons
@@ -55,6 +55,10 @@ const Search: FC<Props> = (props) => {
   const onFilterSelected = (filter: { field: string; value: string }) => {
     dispatch({ type: FILTER_CHANGED, payload: filter });
   };
+
+  useEffect(() => {
+    onSearch(state);
+  }, [state.filters]);
 
   return (
     <form className='search' onSubmit={handleSubmit}>

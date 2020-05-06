@@ -82,9 +82,9 @@ export const RestaurantProvider = ({ children }: any) => {
     const { term, filters } = searchParams;
     // prevents search term for searching through genres
     if (filters['genre']) desiredFields.push('genre');
-    // convert filters to regex's so match against restaurant values
-    const regexFilters = [...Object.values(filters)]
-      .map((filter: any) => (filter ? RegExp(filter, 'gi') : ''))
+    // convert filters to objects with field and regex's to match against restaurant values
+    const regexFilters = [...Object.keys(filters)]
+      .map((key: string) => (filters[key] ? { field: key, regex: RegExp(filters[key], 'gi') } : ''))
       .filter((filter) => filter);
 
     const filteredRestaurants = state.restaurants.filter((restaurant: Restaurant) => {
@@ -97,7 +97,9 @@ export const RestaurantProvider = ({ children }: any) => {
 
       const termMatch = RegExp(term, 'gi').test(matchString);
       if (regexFilters.length) {
-        const filterMatch = regexFilters.every((filter: any) => filter.test(matchString));
+        const filterMatch = regexFilters.every((filter: any) =>
+          filter['regex'].test(restaurant[filter.field])
+        );
         return termMatch && filterMatch;
       }
 
