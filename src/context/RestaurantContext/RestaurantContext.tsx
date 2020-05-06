@@ -1,35 +1,23 @@
 import React, { useReducer, createContext, Dispatch } from 'react';
-import { Restaurant } from '../../models/Restaurant.model';
 
 // Action Types
-import {
-  FETCH_SUCCESS,
-  PAGE_CHANGED,
-  ON_SEARCH,
-  FILTER_CHANGED,
-} from './actionTypes';
-import { Pagination } from '../../models/Pagination.model';
+import { FETCH_SUCCESS, PAGE_CHANGED, ON_SEARCH } from './actionTypes';
 
-interface Action {
-  type: string;
-  payload: any;
-}
+// Models
+import { Action } from '../../models/Action.model';
+import { Restaurant } from '../../models/Restaurant.model';
+import { Pagination } from '../../models/Pagination.model';
+import { Searchparams } from '../../models/SearchParams';
 
 interface RestaurantContextProps {
   state: {
-    filters: {
-      state: string | null;
-      genre: string | null;
-      searchTerm: string;
-      attire: string | null;
-    };
+    searchParams: Searchparams;
     pagination: Pagination;
     restaurants: Restaurant[];
     filteredRestaurants: Restaurant[];
   };
   dispatch: Dispatch<Action>;
   fetchRestaurantsSuccess: (restaurants: Restaurant[]) => void;
-  filterChanged: (filter: string, value: string | number) => void;
   pageChanged: (page: number) => void;
   search: () => void;
 }
@@ -37,10 +25,13 @@ interface RestaurantContextProps {
 export const RestaurantContext = createContext({} as RestaurantContextProps);
 
 const initialState = {
-  filters: {
-    state: null,
-    genre: null,
-    name: '',
+  searchParams: {
+    term: '',
+    filters: {
+      state: null,
+      genre: null,
+      attire: null,
+    },
   },
   pagination: {
     page: 1,
@@ -57,8 +48,6 @@ const reducer = (state = initialState, { type, payload }: Action) => {
       return { ...state, ...payload };
     case PAGE_CHANGED:
       return { ...state, pagination: payload };
-    case FILTER_CHANGED:
-      return { ...state, filters: payload };
     case ON_SEARCH:
       return { ...state, ...payload };
     default:
@@ -88,15 +77,11 @@ export const RestaurantProvider = ({ children }: any) => {
     dispatch({ type: PAGE_CHANGED, payload: pagination });
   };
 
-  const filterChanged = (filter: string, value: string | number) => {
-    const filters = { ...state.filters, [filter]: value || null };
-    dispatch({ type: FILTER_CHANGED, payload: filters });
-  };
-
   // happens when search button is clicked
   const search = () => {
     // remove empty keys to prevent unnecessary iterations
     const filters = { ...state.filters };
+    console.log('filters', filters);
     Object.keys(state.filters).forEach(
       (key) => !filters[key] && delete filters[key]
     );
@@ -142,7 +127,6 @@ export const RestaurantProvider = ({ children }: any) => {
     state,
     dispatch,
     fetchRestaurantsSuccess,
-    filterChanged,
     pageChanged,
     search,
   };

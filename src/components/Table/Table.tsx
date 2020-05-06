@@ -8,7 +8,7 @@ import { Pagination } from '../../models/Pagination.model';
 
 const Table: FC = () => {
   const { state, pageChanged } = useContext(RestaurantContext);
-  const { restaurants, filteredRestaurants, filters, pagination } = state;
+  const { filteredRestaurants, pagination } = state;
   const [results, setResults] = useState<Restaurant[]>([]);
 
   const renderRestaurants = (restaurants: Restaurant[]) => {

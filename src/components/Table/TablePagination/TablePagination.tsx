@@ -1,4 +1,4 @@
-import React, { useContext, FC } from 'react';
+import React, { FC } from 'react';
 import './TablePagination.scss';
 import { Pagination } from '../../../models/Pagination.model';
 

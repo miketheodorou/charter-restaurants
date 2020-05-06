@@ -17,9 +17,11 @@ import { SEARCH_TERM_CHANGED, FILTER_CHANGED } from './actionTypes';
 
 const initialState = {
   term: '',
-  state: null,
-  genre: null,
-  attire: null,
+  filters: {
+    state: null,
+    genre: null,
+    attire: null,
+  },
 };
 
 const reducer = (
