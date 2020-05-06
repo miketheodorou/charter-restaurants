@@ -1,9 +1,6 @@
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 import './Filters.scss';
 import { states, genres } from './options';
-
-// Context
-import { RestaurantContext } from '../../context/RestaurantContext/RestaurantContext';
 
 // Components
 import Select from '../common/Select/Select';
@@ -13,8 +10,17 @@ interface State {
   abbreviation: string;
 }
 
-const Filters: FC = () => {
-  const { filterChanged } = useContext(RestaurantContext);
+interface Filter {
+  field: string;
+  value: any;
+}
+
+interface Props {
+  onSelect: (filter: Filter) => void;
+}
+
+const Filters: FC<Props> = (props) => {
+  const { onSelect } = props;
 
   const renderStates = (states: State[]) => {
     return states.map((state) => {
@@ -32,7 +38,7 @@ const Filters: FC = () => {
         className='filters__filter'
         name='state'
         label='State'
-        onSelect={(value) => filterChanged('state', value)}
+        onSelect={(value) => onSelect({ field: 'state', value })}
       >
         <>
           <option key={0} value=''>
@@ -46,7 +52,7 @@ const Filters: FC = () => {
         items={genres}
         name='genre'
         label='Genre'
-        onSelect={(value) => filterChanged('genre', value)}
+        onSelect={(value) => onSelect({ field: 'genre', value })}
       />
     </div>
   );

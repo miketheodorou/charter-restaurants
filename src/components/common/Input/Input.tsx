@@ -10,6 +10,7 @@ interface Props {
   placeholder?: string;
   required?: boolean;
   icon?: any;
+  value: any;
   onChange: (val: string | number) => void;
 }
 
@@ -23,6 +24,7 @@ const Input: FC<Props> = (props) => {
     placeholder,
     required,
     icon = null,
+    value,
     onChange,
   } = props;
   return (
@@ -38,6 +40,7 @@ const Input: FC<Props> = (props) => {
         id={id}
         placeholder={placeholder}
         required={required}
+        value={value}
         onChange={(e) => onChange(e.target.value)}
       />
     </div>
