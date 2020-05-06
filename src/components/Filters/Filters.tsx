@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import './Filters.scss';
-import { states, genres } from './options';
+import { states, genres, attire } from './options';
 
 // Components
 import Select from '../common/Select/Select';
@@ -53,6 +53,14 @@ const Filters: FC<Props> = (props) => {
         name='genre'
         label='Genre'
         onSelect={(value) => onSelect({ field: 'genre', value })}
+      />
+
+      <Select
+        className='filters__filter'
+        items={attire}
+        name='attire'
+        label='Attire'
+        onSelect={(value) => onSelect({ field: 'attire', value })}
       />
     </div>
   );
