@@ -84,7 +84,14 @@ export const RestaurantProvider = ({ children }: any) => {
     if (filters['genre']) desiredFields.push('genre');
     // convert filters to objects with field and regex's to match against restaurant values
     const regexFilters = [...Object.keys(filters)]
-      .map((key: string) => (filters[key] ? { field: key, regex: RegExp(filters[key], 'gi') } : ''))
+      .map((key: string) => {
+        // need an exact match for attire since there is overlap for the two types
+        if (filters[key] && key === 'attire') {
+          return { field: key, regex: RegExp('^' + filters[key] + '$', 'i') };
+        }
+
+        return filters[key] ? { field: key, regex: RegExp(filters[key], 'i') } : '';
+      })
       .filter((filter) => filter);
 
     const filteredRestaurants = state.restaurants.filter((restaurant: Restaurant) => {
