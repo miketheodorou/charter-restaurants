@@ -9,6 +9,7 @@
   .panel {
     border-radius: 3px;
     box-shadow: var(--box-shadow-lg);
+    background-color: #fff;
 
     &__header {
       background-color: var(--color-blue-7);
@@ -30,7 +31,6 @@
     }
 
     &__body {
-      background-color: #fff;
       padding: 1.4em 1.15em;
       border-bottom-left-radius: inherit;
       border-bottom-right-radius: inherit;

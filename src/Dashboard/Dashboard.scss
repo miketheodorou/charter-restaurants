@@ -1,3 +1,9 @@
+.page {
+  &__title {
+    margin-bottom: 1em;
+  }
+}
+
 .restaurants {
   display: grid;
   grid-template-rows: auto 1fr;

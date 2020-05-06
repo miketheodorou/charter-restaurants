@@ -26,12 +26,15 @@ const Dashboard = () => {
   };
 
   return (
-    <section className='restaurants'>
-      <Search onSearch={onSearch} />
-      <div className='restaurants__results'>
-        <Table />
-      </div>
-    </section>
+    <>
+      <h1 className='page__title'>Restaurants</h1>
+      <section className='restaurants'>
+        <Search onSearch={onSearch} />
+        <div className='restaurants__results'>
+          <Table />
+        </div>
+      </section>
+    </>
   );
 };
 
