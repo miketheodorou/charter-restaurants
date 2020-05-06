@@ -24,15 +24,12 @@ const initialState = {
   },
 };
 
-const reducer = (
-  state: Searchparams = initialState,
-  { type, payload }: Action
-) => {
+const reducer = (state: Searchparams = initialState, { type, payload }: Action) => {
   switch (type) {
     case SEARCH_TERM_CHANGED:
       return { ...state, term: payload };
     case FILTER_CHANGED:
-      return { ...state, [payload.field]: payload.value };
+      return { ...state, filters: { ...state.filters, [payload.field]: payload.value } };
     default:
       return state;
   }

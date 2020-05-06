@@ -19,7 +19,7 @@ interface RestaurantContextProps {
   dispatch: Dispatch<Action>;
   fetchRestaurantsSuccess: (restaurants: Restaurant[]) => void;
   pageChanged: (page: number) => void;
-  search: () => void;
+  search: (searchParams: Searchparams) => void;
 }
 
 export const RestaurantContext = createContext({} as RestaurantContextProps);
@@ -77,50 +77,41 @@ export const RestaurantProvider = ({ children }: any) => {
     dispatch({ type: PAGE_CHANGED, payload: pagination });
   };
 
-  // happens when search button is clicked
-  const search = () => {
-    // remove empty keys to prevent unnecessary iterations
-    const filters = { ...state.filters };
-    console.log('filters', filters);
-    Object.keys(state.filters).forEach(
-      (key) => !filters[key] && delete filters[key]
-    );
-    const filterCount = Object.keys(filters).length;
-    if (filterCount) {
-      // go through everyfilter and test them against the matching object keys
-      const filteredRestaurants = state.restaurants.filter(
-        (restaurant: any) => {
-          let matches = 0;
-          Object.keys(filters).forEach((key: any) => {
-            const regex = RegExp(filters[key], 'gi');
-            if (regex.test(restaurant[key])) matches += 1;
-          });
-          return matches === filterCount;
-        }
-      );
+  let desiredFields = ['name', 'city', 'state'];
+  const search = (searchParams: Searchparams) => {
+    const { term, filters } = searchParams;
+    // prevents search term for searching through genres
+    if (filters['genre']) desiredFields.push('genre');
+    // convert filters to regex's so match against restaurant values
+    const regexFilters = [...Object.values(filters)]
+      .map((filter: any) => (filter ? RegExp(filter, 'gi') : ''))
+      .filter((filter) => filter);
 
-      const pagination = {
-        page: 1,
-        pageSize: 10,
-        totalPages: Math.ceil(filteredRestaurants.length / 10),
-        totalItems: filteredRestaurants.length,
-      };
-      const payload = { filteredRestaurants, pagination };
-      return dispatch({ type: ON_SEARCH, payload });
-    }
+    const filteredRestaurants = state.restaurants.filter((restaurant: Restaurant) => {
+      // combines restaurant values to test with regex
+      const matchString = [
+        ...Object.keys(restaurant).map((key: string) => {
+          if (desiredFields.includes(key)) return restaurant[key];
+        }),
+      ].join(' ');
 
-    // if no fields are present, do a default search and grab the original results
+      const termMatch = RegExp(term, 'gi').test(matchString);
+      if (regexFilters.length) {
+        const filterMatch = regexFilters.every((filter: any) => filter.test(matchString));
+        return termMatch && filterMatch;
+      }
+
+      return termMatch;
+    });
+
     const pagination = {
       page: 1,
       pageSize: 10,
-      totalPages: Math.ceil(state.restaurants.length / 10),
-      totalItems: state.restaurants.length,
+      totalPages: Math.ceil(filteredRestaurants.length / 10),
+      totalItems: filteredRestaurants.length,
     };
-    const payload = {
-      filteredRestaurants: [...state.restaurants],
-      pagination,
-    };
-    dispatch({ type: ON_SEARCH, payload });
+
+    dispatch({ type: ON_SEARCH, payload: { filteredRestaurants, pagination } });
   };
 
   const value = {
@@ -131,9 +122,5 @@ export const RestaurantProvider = ({ children }: any) => {
     search,
   };
 
-  return (
-    <RestaurantContext.Provider value={value}>
-      {children}
-    </RestaurantContext.Provider>
-  );
+  return <RestaurantContext.Provider value={value}>{children}</RestaurantContext.Provider>;
 };

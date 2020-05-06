@@ -15,14 +15,14 @@ import Table from '../components/Table/Table';
 import Search from '../components/Search/Search';
 
 const Dashboard = () => {
-  const { fetchRestaurantsSuccess } = useContext(RestaurantContext);
+  const { fetchRestaurantsSuccess, search } = useContext(RestaurantContext);
 
   useEffect(() => {
     getRestaurants().then(fetchRestaurantsSuccess).catch(console.error);
   }, []);
 
   const onSearch = (searchParams: Searchparams) => {
-    console.log(searchParams);
+    search(searchParams);
   };
 
   return (

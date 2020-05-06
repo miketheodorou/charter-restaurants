@@ -1,4 +1,5 @@
 export interface Restaurant {
+  [key: string]: string;
   id: string;
   name: string;
   address1: string;
