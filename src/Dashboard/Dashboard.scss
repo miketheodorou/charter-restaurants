@@ -5,34 +5,8 @@
   max-width: 1600px;
   margin: 0 auto;
 
-  &__search {
-    border-radius: 3px;
-    background-color: #fff;
-    padding: 1.4em 1.15em;
-    box-shadow: var(--box-shadow-lg);
-
-    .search {
-      display: flex;
-      align-items: flex-end;
-      margin-bottom: 1em;
-
-      &__button {
-        background-color: var(--color-blue-7);
-        border: none;
-        color: #fff;
-        border-radius: 3px;
-        margin-left: 0.8em;
-        padding: 0.6em 1em;
-        margin-left: 0.8em;
-
-        cursor: pointer;
-      }
-    }
-  }
-
   &__results {
     overflow: hidden;
-    max-height: 74vh;
     border-radius: 3px;
     border-bottom: 0 none;
     box-shadow: var(--box-shadow-lg);
