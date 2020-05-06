@@ -1,0 +1,32 @@
+.input {
+  width: 100%;
+  position: relative;
+
+  &__field {
+    width: calc(100% - 1.4em);
+    padding: 0.75em 0.6em;
+    border-radius: 3px;
+    border: 2px solid var(--color-grey-3);
+    font-size: 0.8rem;
+    transition: all 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-blue-6);
+    }
+  }
+
+  &--with-icon {
+    .input__field {
+      width: calc(100% - 3.2em);
+      padding-left: 2.2em;
+    }
+
+    .icon {
+      position: absolute;
+      left: 0.6em;
+      bottom: 0.65em;
+      width: 0.9rem;
+    }
+  }
+}
