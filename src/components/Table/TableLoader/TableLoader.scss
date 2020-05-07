@@ -5,6 +5,7 @@
   border-radius: 3px;
   box-shadow: var(--box-shadow-lg);
   position: relative;
+  background-color: #fff;
   animation: fade-in 0.2s linear forwards;
 
   &__header {
@@ -26,7 +27,7 @@
   &__row {
     height: 48px;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-gap: 2em;
     align-items: center;
     justify-items: center;

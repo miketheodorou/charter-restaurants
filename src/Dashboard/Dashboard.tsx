@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import './Dashboard.scss';
 
 // API
@@ -10,9 +10,6 @@ import { Searchparams } from '../models/SearchParams';
 // Context
 import { RestaurantContext } from '../context/RestaurantContext/RestaurantContext';
 
-// Hooks
-import useStatus from '../hooks/useStatus/useStatus';
-
 // Components
 import Search from '../components/Search/Search';
 import Table from '../components/Table/Table';
@@ -20,8 +17,8 @@ import TableLoader from '../components/Table/TableLoader/TableLoader';
 import { Restaurant } from '../models/Restaurant.model';
 
 const Dashboard = () => {
-  const { fetchRestaurantsSuccess, search } = useContext(RestaurantContext);
-  const { Status, setStatus } = useStatus('loading');
+  const { fetchRestaurantsSuccess, state, search } = useContext(RestaurantContext);
+  const [status, setStatus] = useState<string>('loading');
 
   const handleFetchSuccess = (restaurants: Restaurant[]) => {
     setStatus('success');
@@ -37,14 +34,23 @@ const Dashboard = () => {
     search(searchParams);
   };
 
+  const renderStatus = (status: string) => {
+    switch (status) {
+      case 'loading':
+        return <TableLoader />;
+      case 'success':
+        return <Table restaurants={state.filteredRestaurants} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <h1 className='page__title'>Restaurants</h1>
       <section className='restaurants'>
         <Search onSearch={onSearch} />
-        <div className='restaurants__results'>
-          <Status loading={<TableLoader />} success={<Table />} />
-        </div>
+        <div className='restaurants__results'>{renderStatus(status)}</div>
       </section>
     </>
   );

@@ -6,9 +6,14 @@ import { RestaurantContext } from '../../context/RestaurantContext/RestaurantCon
 import TablePagination from './TablePagination/TablePagination';
 import { Pagination } from '../../models/Pagination.model';
 
-const Table: FC = () => {
+interface Props {
+  restaurants: Restaurant[];
+}
+
+const Table: FC<Props> = (props) => {
+  const { restaurants } = props;
   const { state, pageChanged } = useContext(RestaurantContext);
-  const { filteredRestaurants, pagination } = state;
+  const { pagination } = state;
   const [results, setResults] = useState<Restaurant[]>([]);
 
   const renderRestaurants = (restaurants: Restaurant[]) => {
@@ -26,8 +31,8 @@ const Table: FC = () => {
   };
 
   useEffect(() => {
-    parsePages(filteredRestaurants, pagination);
-  }, [filteredRestaurants, pagination]);
+    parsePages(restaurants, pagination);
+  }, [restaurants, pagination]);
 
   return (
     <>
