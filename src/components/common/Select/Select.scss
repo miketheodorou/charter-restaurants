@@ -43,6 +43,7 @@
     .option {
       padding: 0.5em;
       width: 100%;
+      overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
       list-style: none;
@@ -54,7 +55,7 @@
       &:focus {
         outline: none;
         background-color: var(--color-blue-2);
-        color: VAR(--color-blue-7);
+        color: var(--color-blue-7);
       }
     }
   }

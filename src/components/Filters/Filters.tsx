@@ -28,7 +28,7 @@ const Filters: FC<Props> = (props) => {
   return (
     <div className='filters'>
       <Select
-        className='filters__filter'
+        className='filters__filter state'
         items={states}
         name='state'
         label='State'

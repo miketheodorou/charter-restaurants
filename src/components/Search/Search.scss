@@ -7,6 +7,15 @@
     grid-template-columns: 1fr;
   }
 
+  .panel__body {
+    padding-bottom: 0.4em;
+
+    .select,
+    .search-bar {
+      margin-bottom: 1em;
+    }
+  }
+
   .search-bar {
     display: flex;
     align-items: flex-end;

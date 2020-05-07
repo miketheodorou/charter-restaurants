@@ -1,5 +1,15 @@
 .filters {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  grid-gap: 1em;
+  display: flex;
+  flex-wrap: wrap;
+
+  &__filter {
+    width: 100%;
+    max-width: 10em;
+    margin-right: 1em;
+    margin-bottom: 1em;
+
+    &.state {
+      max-width: 4.5em;
+    }
+  }
 }
