@@ -15,7 +15,7 @@
     display: flex;
 
     .control {
-      padding: 0.4em 0.8em;
+      padding: 0.4em 1em;
       margin: 0 0.4em;
       background: transparent;
       border: none;
@@ -52,6 +52,23 @@
       &--edge {
         .icon {
           width: 1em;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .pagination__controls {
+    .control {
+      padding: 0.8em 1.4em;
+
+      .icon {
+        width: 1.6em;
+      }
+      &--edge {
+        .icon {
+          width: 1.2em;
         }
       }
     }
