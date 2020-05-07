@@ -38,7 +38,7 @@ const Filters: FC<Props> = (props) => {
         onSelect={(value) => onSelect({ field: 'state', value })}
       />
       <Select
-        className='filters__filter'
+        className='filters__filter grenre'
         items={genres}
         name='genre'
         label='Genre'
@@ -47,7 +47,7 @@ const Filters: FC<Props> = (props) => {
       />
 
       <Select
-        className='filters__filter'
+        className='filters__filter attire'
         items={attire}
         name='attire'
         label='Attire'

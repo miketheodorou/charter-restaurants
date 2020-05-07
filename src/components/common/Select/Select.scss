@@ -53,12 +53,27 @@
       transition: all 0.2s;
       border-radius: var(--border-radius);
       cursor: pointer;
+      display: flex;
+      align-items: center;
+
+      &:not(:last-child) {
+        margin-bottom: 0.5em;
+      }
 
       &:hover,
-      &:focus {
+      &:focus,
+      &[aria-selected='true'] {
         outline: none;
         background-color: var(--color-blue-2);
         color: var(--color-blue-7);
+      }
+
+      .icon {
+        width: 0.8em;
+        height: 0.8em;
+        margin-left: 0.4em;
+        fill: var(--color-blue-7);
+        margin-bottom: 0.1em;
       }
     }
   }

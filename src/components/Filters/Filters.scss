@@ -4,12 +4,19 @@
 
   &__filter {
     width: 100%;
-    max-width: 10em;
     margin-right: 1em;
     margin-bottom: 1em;
 
     &.state {
       max-width: 4.5em;
+    }
+
+    &.genre {
+      max-width: 8em;
+    }
+
+    &.attire {
+      max-width: 12em;
     }
   }
 }

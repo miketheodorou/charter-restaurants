@@ -1,6 +1,8 @@
 import React, { FC, useState, useEffect } from 'react';
-
 import './Select.scss';
+
+// Icons
+import { CheckIcon } from '../../../assets/icons';
 
 interface Props {
   className?: string;
@@ -49,6 +51,10 @@ const Select: FC<Props> = (props) => {
     );
   };
 
+  const isSelected = (value: any, item: any, optionValue: string | undefined) => {
+    return optionValue ? value === item[optionValue] : value === item.value;
+  };
+
   const renderItems = (items: any[]) => {
     return [
       <li
@@ -56,11 +62,12 @@ const Select: FC<Props> = (props) => {
         onClick={onOptionSelcted}
         onKeyPress={onOptionSelcted}
         role='option'
-        aria-selected={value === ''}
+        aria-selected={!value}
         tabIndex={0}
         className='option'
       >
-        All
+        <span className='option__text'>All</span>
+        {!value ? <CheckIcon /> : null}
       </li>,
       ...items.map((item, i) => (
         <li
@@ -68,11 +75,12 @@ const Select: FC<Props> = (props) => {
           onClick={() => onOptionSelcted(item)}
           onKeyPress={() => onOptionSelcted(item)}
           role='option'
-          aria-selected={value === item.value}
+          aria-selected={isSelected(value, item, optionValue)}
           tabIndex={0}
           className='option'
         >
-          {optionLabel ? item[optionLabel] : item.label}
+          <span className='option__text'>{optionLabel ? item[optionLabel] : item.label}</span>
+          {isSelected(value, item, optionValue) ? <CheckIcon /> : null}
         </li>
       )),
     ];
