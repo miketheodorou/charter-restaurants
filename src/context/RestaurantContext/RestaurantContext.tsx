@@ -77,10 +77,12 @@ export const RestaurantProvider = ({ children }: any) => {
     dispatch({ type: PAGE_CHANGED, payload: pagination });
   };
 
-  let desiredFields = ['name', 'city', 'state'];
+  // keeping outside function to prevent variable form being created on every search
+  const defaultDesiredFields = ['name', 'city', 'state'];
   const search = (searchParams: Searchparams) => {
     const { term, filters } = searchParams;
     // prevents search term for searching through genres
+    let desiredFields = [...defaultDesiredFields];
     if (filters['genre']) desiredFields.push('genre');
     // convert filters to objects with field and regex's to match against restaurant values
     const regexFilters = [...Object.keys(filters)]
