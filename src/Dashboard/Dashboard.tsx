@@ -10,15 +10,27 @@ import { Searchparams } from '../models/SearchParams';
 // Context
 import { RestaurantContext } from '../context/RestaurantContext/RestaurantContext';
 
+// Hooks
+import useStatus from '../hooks/useStatus/useStatus';
+
 // Components
-import Table from '../components/Table/Table';
 import Search from '../components/Search/Search';
+import Table from '../components/Table/Table';
+import TableLoader from '../components/Table/TableLoader/TableLoader';
+import { Restaurant } from '../models/Restaurant.model';
 
 const Dashboard = () => {
   const { fetchRestaurantsSuccess, search } = useContext(RestaurantContext);
+  const { Status, setStatus } = useStatus('loading');
+
+  const handleFetchSuccess = (restaurants: Restaurant[]) => {
+    setStatus('success');
+    fetchRestaurantsSuccess(restaurants);
+  };
 
   useEffect(() => {
-    getRestaurants().then(fetchRestaurantsSuccess).catch(console.error);
+    setStatus('loading');
+    getRestaurants().then(handleFetchSuccess).catch(console.error);
   }, []);
 
   const onSearch = (searchParams: Searchparams) => {
@@ -31,7 +43,7 @@ const Dashboard = () => {
       <section className='restaurants'>
         <Search onSearch={onSearch} />
         <div className='restaurants__results'>
-          <Table />
+          <Status loading={<TableLoader />} success={<Table />} />
         </div>
       </section>
     </>

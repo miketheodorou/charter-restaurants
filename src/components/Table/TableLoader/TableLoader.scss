@@ -5,6 +5,7 @@
   border-radius: 3px;
   box-shadow: var(--box-shadow-lg);
   position: relative;
+  animation: fade-in 0.2s linear forwards;
 
   &__header {
     border-top-left-radius: inherit;

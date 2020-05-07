@@ -18,7 +18,7 @@ const TableLoader: FC = () => {
   return (
     <section className='table-loader'>
       <div className='table-loader__header table-loader__row'>{renderColumns(5)}</div>
-      <div className='table-loader__body'>{renderRows(8, 5)}</div>
+      <div className='table-loader__body'>{renderRows(8, 6)}</div>
     </section>
   );
 };
