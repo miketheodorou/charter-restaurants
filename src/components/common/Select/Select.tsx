@@ -1,50 +1,115 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 
 import './Select.scss';
 
-interface Item {
-  label: string;
-  value: any;
-}
-
 interface Props {
   className?: string;
-  items?: Item[];
+  items: any[];
   name: string;
   label: string;
+  value?: any;
   required?: boolean;
-  children?: any;
   onSelect: (item: string) => void;
+  // option-* used when passing in objects that don't have generic "label" and "field" props
+  optionLabel?: string;
+  optionValue?: string;
 }
 
 const Select: FC<Props> = (props) => {
-  const { className, items, name, label, required, children, onSelect } = props;
+  const {
+    className,
+    items,
+    name,
+    label,
+    value,
+    required,
+    onSelect,
+    optionLabel,
+    optionValue,
+  } = props;
+  const [expanded, setExpanded] = useState<boolean>(false);
+  const [node, setNode] = useState<HTMLDivElement | any>(null);
+
+  const onOptionSelcted = (item: any = '') => {
+    // if no item passed in, assume the "all" was selected
+    item ? onSelect(optionValue ? item[optionValue] : item.value) : onSelect('');
+    setExpanded(false);
+  };
+
+  const renderOptions = () => {
+    return (
+      <ul
+        tabIndex={-1}
+        role='listbox'
+        aria-labelledby='select__options'
+        className='select__options'
+      >
+        {renderItems(items)}
+      </ul>
+    );
+  };
 
   const renderItems = (items: any[]) => {
     return [
-      <option key={0} value=''>
+      <li
+        key={'all'}
+        onClick={onOptionSelcted}
+        onKeyPress={onOptionSelcted}
+        role='option'
+        aria-selected={value === ''}
+        tabIndex={0}
+        className='option'
+      >
         All
-      </option>,
-      ...items.map((item) => (
-        <option key={item.value} value={item.value}>
-          {item.label}
-        </option>
+      </li>,
+      ...items.map((item, i) => (
+        <li
+          key={i}
+          onClick={() => onOptionSelcted(item)}
+          onKeyPress={() => onOptionSelcted(item)}
+          role='option'
+          aria-selected={value === item.value}
+          tabIndex={0}
+          className='option'
+        >
+          {optionLabel ? item[optionLabel] : item.label}
+        </li>
       )),
     ];
   };
+
+  // closes the select menu when clicking outside of it
+  const handleClickOutside = (event: any) => {
+    if (node?.contains(event.target)) return;
+    setExpanded(false);
+  };
+
+  useEffect(() => {
+    if (expanded) {
+      document.addEventListener('mousedown', handleClickOutside, false);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside, false);
+    };
+  }, [expanded]);
+
   return (
-    <div className={`select ${className}`}>
+    <div className={`select ${className}`} ref={(node: HTMLDivElement) => setNode(node)}>
       <label htmlFor={name} className='select__label'>
         {label}
       </label>
-      <select
+
+      <button
+        aria-haspopup='listbox'
+        aria-labelledby='select__input'
+        id={name}
         className='select__input'
-        name={name}
-        required={required || false}
-        onChange={(e) => onSelect(e.target.value)}
+        onClick={() => setExpanded(!expanded)}
       >
-        {items ? renderItems(items) : children}
-      </select>
+        {value || 'All'}
+      </button>
+      {expanded ? renderOptions() : null}
     </div>
   );
 };

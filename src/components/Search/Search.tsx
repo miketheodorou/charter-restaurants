@@ -92,7 +92,7 @@ const Search: FC<Props> = (props) => {
           <h2 className='title'>Filters</h2>
         </header>
         <div className='panel__body'>
-          <Filters onSelect={onFilterSelected} />
+          <Filters onSelect={onFilterSelected} filters={state.filters} />
         </div>
       </div>
     </form>

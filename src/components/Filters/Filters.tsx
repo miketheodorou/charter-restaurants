@@ -16,42 +16,33 @@ interface Filter {
 }
 
 interface Props {
+  filters: {
+    [key: string]: any;
+  };
   onSelect: (filter: Filter) => void;
 }
 
 const Filters: FC<Props> = (props) => {
-  const { onSelect } = props;
-
-  const renderStates = (states: State[]) => {
-    return states.map((state) => {
-      return (
-        <option key={state.abbreviation} value={state.abbreviation}>
-          {state.abbreviation} - {state.name}
-        </option>
-      );
-    });
-  };
+  const { filters, onSelect } = props;
 
   return (
     <div className='filters'>
       <Select
         className='filters__filter'
+        items={states}
         name='state'
         label='State'
+        optionLabel='abbreviation'
+        optionValue='abbreviation'
+        value={filters.state}
         onSelect={(value) => onSelect({ field: 'state', value })}
-      >
-        <>
-          <option key={0} value=''>
-            All
-          </option>
-          {renderStates(states)}
-        </>
-      </Select>
+      />
       <Select
         className='filters__filter'
         items={genres}
         name='genre'
         label='Genre'
+        value={filters.genre}
         onSelect={(value) => onSelect({ field: 'genre', value })}
       />
 
@@ -60,6 +51,7 @@ const Filters: FC<Props> = (props) => {
         items={attire}
         name='attire'
         label='Attire'
+        value={filters.attire}
         onSelect={(value) => onSelect({ field: 'attire', value })}
       />
     </div>
