@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 import './Select.scss';
 
 // Icons
-import { CheckIcon } from '../../../assets/icons';
+import { CheckIcon, CaretIcon } from '../../../assets/icons';
 
 interface Props {
   className?: string;
@@ -115,7 +115,8 @@ const Select: FC<Props> = (props) => {
         className='select__input'
         onClick={() => setExpanded(!expanded)}
       >
-        {value || 'All'}
+        <span className='selected'>{value || 'All'}</span>
+        <CaretIcon direction='down' className={expanded ? 'icon-caret--up' : ''} />
       </button>
       {expanded ? renderOptions() : null}
     </div>

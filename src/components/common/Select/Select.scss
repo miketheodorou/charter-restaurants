@@ -18,6 +18,10 @@
     &:focus {
       outline: none;
       border-color: var(--color-blue-6);
+
+      .icon {
+        fill: var(--color-blue-7);
+      }
     }
 
     .selected {
@@ -27,6 +31,8 @@
     }
 
     .icon {
+      width: 12px;
+      fill: var(--color-grey-6);
     }
   }
 
@@ -38,7 +44,7 @@
     z-index: 99;
     background-color: #fff;
     width: 100%;
-    max-height: 8em;
+    max-height: 10em;
     overflow-y: scroll;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow-lg);

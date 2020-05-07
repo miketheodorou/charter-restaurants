@@ -8,7 +8,7 @@ const SearchIcon: FC<Props> = (props) => {
   const { className } = props;
   return (
     <svg
-      className={`icon icon--search ${className || ''}`}
+      className={`icon icon-search ${className || ''}`}
       width='16px'
       height='16px'
       x='0px'

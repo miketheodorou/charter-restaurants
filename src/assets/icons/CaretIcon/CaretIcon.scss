@@ -1,0 +1,19 @@
+.icon-caret {
+  transition: transform 0.2s linear;
+  transform-style: preserve-3d;
+  &--down {
+    transform: rotateX(0);
+  }
+
+  &--up {
+    transform: rotateX(-180deg);
+  }
+
+  &--right {
+    transform: rotateZ(-90deg);
+  }
+
+  &--left {
+    transform: rotateZ(90deg);
+  }
+}
