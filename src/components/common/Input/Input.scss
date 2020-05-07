@@ -9,6 +9,7 @@
     border: 2px solid var(--color-grey-3);
     font-size: 0.8rem;
     line-height: 1.2;
+    box-shadow: var(--box-shadow-md);
     transition: all 0.2s;
 
     &::-webkit-input-placeholder,

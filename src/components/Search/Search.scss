@@ -21,14 +21,16 @@
     align-items: flex-end;
 
     &__button {
-      background-color: var(--color-blue-7);
       border: none;
       color: #fff;
-      border-radius: var(--border-radius);
       margin-left: 0.8em;
       padding: 0.6em 1em;
-      margin-left: 0.8em;
+      margin-left: 1em;
       font-weight: 600;
+      font-size: 0.9rem;
+      background-color: var(--color-blue-7);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow-md);
     }
   }
 }
