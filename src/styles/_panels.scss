@@ -1,5 +1,5 @@
 .panel {
-  border-radius: 3px;
+  border-radius: var(--border-radius);
   box-shadow: var(--box-shadow-lg);
   background-color: #fff;
 

@@ -15,13 +15,11 @@
       background-color: var(--color-blue-7);
       border: none;
       color: #fff;
-      border-radius: 3px;
+      border-radius: var(--border-radius);
       margin-left: 0.8em;
       padding: 0.6em 1em;
       margin-left: 0.8em;
       font-weight: 600;
-
-      cursor: pointer;
     }
   }
 }

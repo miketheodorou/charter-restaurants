@@ -13,7 +13,7 @@
 
     &__results {
       overflow: hidden;
-      border-radius: 3px;
+      border-radius: var(--border-radius);
       border-bottom: 0 none;
       box-shadow: var(--box-shadow-lg);
     }

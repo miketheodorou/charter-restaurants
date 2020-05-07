@@ -2,7 +2,7 @@
   width: 100%;
   display: grid;
   grid-template-rows: 50px 1fr;
-  border-radius: 3px;
+  border-radius: var(--border-radius);
   box-shadow: var(--box-shadow-lg);
   position: relative;
   background-color: #fff;
