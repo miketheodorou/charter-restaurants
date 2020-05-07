@@ -77,13 +77,9 @@ export const RestaurantProvider = ({ children }: any) => {
     dispatch({ type: PAGE_CHANGED, payload: pagination });
   };
 
-  // keeping outside function to prevent variable form being created on every search
-  const defaultDesiredFields = ['name', 'city', 'state'];
   const search = (searchParams: Searchparams) => {
     const { term, filters } = searchParams;
-    // prevents search term for searching through genres
-    let desiredFields = [...defaultDesiredFields];
-    if (filters['genre']) desiredFields.push('genre');
+
     // convert filters to objects with field and regex's to match against restaurant values
     const regexFilters = [...Object.keys(filters)]
       .map((key: string) => {
@@ -98,14 +94,17 @@ export const RestaurantProvider = ({ children }: any) => {
 
     const filteredRestaurants = state.restaurants.filter((restaurant: Restaurant) => {
       // combines restaurant values to test with regex
-      const matchString = [
-        ...Object.keys(restaurant).map((key: string) => {
-          if (desiredFields.includes(key)) return restaurant[key];
-        }),
-      ].join(' ');
+      const searchFields = ['name', 'city', 'state'];
+      const matchString = Object.keys(restaurant).reduce((acc: string, key: string) => {
+        if (searchFields.includes(key)) acc += restaurant[key];
+        return acc;
+      }, '');
 
+      // searcht term matches a name / city / state
       const termMatch = RegExp(term, 'gi').test(matchString);
+
       if (regexFilters.length) {
+        // all filters that have been applied match their corresponding field
         const filterMatch = regexFilters.every((filter: any) =>
           filter['regex'].test(restaurant[filter.field])
         );
