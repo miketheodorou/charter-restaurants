@@ -6,6 +6,7 @@ import { getRestaurants } from '../api/restaurantApi';
 
 // Models
 import { Searchparams } from '../models/SearchParams';
+import { Restaurant } from '../models/Restaurant.model';
 
 // Context
 import { RestaurantContext } from '../context/RestaurantContext/RestaurantContext';
@@ -13,8 +14,8 @@ import { RestaurantContext } from '../context/RestaurantContext/RestaurantContex
 // Components
 import Search from '../components/Search/Search';
 import Table from '../components/Table/Table';
+import TableEmpty from '../components/Table/TableEmpty/TableEmpty';
 import TableLoader from '../components/Table/TableLoader/TableLoader';
-import { Restaurant } from '../models/Restaurant.model';
 
 const Dashboard = () => {
   const { fetchRestaurantsSuccess, state, search } = useContext(RestaurantContext);
@@ -25,11 +26,6 @@ const Dashboard = () => {
     fetchRestaurantsSuccess(restaurants);
   };
 
-  useEffect(() => {
-    setStatus('loading');
-    getRestaurants().then(handleFetchSuccess).catch(console.error);
-  }, []);
-
   const onSearch = (searchParams: Searchparams) => {
     search(searchParams);
   };
@@ -38,12 +34,25 @@ const Dashboard = () => {
     switch (status) {
       case 'loading':
         return <TableLoader />;
+      case 'empty':
+        return <TableEmpty />;
       case 'success':
         return <Table restaurants={state.filteredRestaurants} />;
       default:
         return null;
     }
   };
+
+  useEffect(() => {
+    setStatus('loading');
+    getRestaurants().then(handleFetchSuccess).catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    if (status !== 'loading') {
+      state.filteredRestaurants.length > 0 ? setStatus('success') : setStatus('empty');
+    }
+  }, [state]);
 
   return (
     <section className='dashboard'>

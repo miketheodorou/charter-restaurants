@@ -1,0 +1,32 @@
+.table-empty {
+  width: 100%;
+  height: 100%;
+  .panel {
+    &__body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .no-results {
+        text-align: center;
+        padding: 2em;
+
+        &__title {
+          font-size: 1.4rem;
+          margin-bottom: 0.5em;
+        }
+
+        &__message {
+          font-size: 1rem;
+          margin-bottom: 2em;
+        }
+
+        &__sub-message {
+          font-weight: 600;
+          font-size: 0.85rem;
+          color: var(--color-blue-7);
+        }
+      }
+    }
+  }
+}
