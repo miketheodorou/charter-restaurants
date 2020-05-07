@@ -46,13 +46,13 @@ const Dashboard = () => {
   };
 
   return (
-    <>
-      <h1 className='page__title'>Restaurants</h1>
+    <section className='dashboard'>
+      <h1 className='dashboard__title'>Restaurants</h1>
       <section className='restaurants'>
         <Search onSearch={onSearch} />
         <div className='restaurants__results'>{renderStatus(status)}</div>
       </section>
-    </>
+    </section>
   );
 };
 

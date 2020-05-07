@@ -1,20 +1,21 @@
-.page {
+.dashboard {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1600px;
   &__title {
     margin-bottom: 1em;
   }
-}
 
-.restaurants {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  grid-gap: 1.5em;
-  width: 100%;
-  max-width: 1600px;
+  .restaurants {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-gap: 1.5em;
 
-  &__results {
-    overflow: hidden;
-    border-radius: 3px;
-    border-bottom: 0 none;
-    box-shadow: var(--box-shadow-lg);
+    &__results {
+      overflow: hidden;
+      border-radius: 3px;
+      border-bottom: 0 none;
+      box-shadow: var(--box-shadow-lg);
+    }
   }
 }
