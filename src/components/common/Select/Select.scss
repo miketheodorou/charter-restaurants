@@ -11,16 +11,16 @@
     justify-content: space-between;
     background-color: #fff;
     border-radius: var(--border-radius);
-    border: 2px solid var(--color-grey-3);
+    border: 2px solid var(--color-secondary-3);
     box-shadow: var(--box-shadow-md);
     transition: all 0.2s;
 
     &:focus {
       outline: none;
-      border-color: var(--color-blue-6);
+      border-color: var(--color-primary-6);
 
       .icon {
-        fill: var(--color-blue-7);
+        fill: var(--color-primary-7);
       }
     }
 
@@ -33,7 +33,7 @@
 
     .icon {
       width: 12px;
-      fill: var(--color-grey-6);
+      fill: var(--color-secondary-6);
     }
   }
 
@@ -71,15 +71,15 @@
       &:focus,
       &[aria-selected='true'] {
         outline: none;
-        background-color: var(--color-blue-2);
-        color: var(--color-blue-7);
+        background-color: var(--color-primary-2);
+        color: var(--color-primary-7);
       }
 
       .icon {
         width: 0.8em;
         height: 0.8em;
         margin-left: 0.4em;
-        fill: var(--color-blue-7);
+        fill: var(--color-primary-7);
         margin-bottom: 0.1em;
       }
     }

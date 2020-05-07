@@ -6,7 +6,7 @@
     width: 100%;
     padding: 0.6em;
     border-radius: var(--border-radius);
-    border: 2px solid var(--color-grey-3);
+    border: 2px solid var(--color-secondary-3);
     font-size: 0.8rem;
     line-height: 1.2;
     box-shadow: var(--box-shadow-md);
@@ -14,17 +14,17 @@
 
     &::-webkit-input-placeholder,
     &::-webkit-input-placeholder {
-      color: var(--color-grey-7);
+      color: var(--color-secondary-7);
       transition: all 0.2s;
     }
 
     &:focus {
       outline: none;
-      border-color: var(--color-blue-6);
+      border-color: var(--color-primary-6);
 
       &::-webkit-input-placeholder,
       &::placeholder {
-        color: var(--color-grey-9);
+        color: var(--color-secondary-9);
       }
     }
   }
@@ -34,7 +34,7 @@
       padding-left: 2.2em;
 
       &:focus + .icon {
-        fill: var(--color-grey-9);
+        fill: var(--color-secondary-9);
       }
     }
 
@@ -44,7 +44,7 @@
       left: 0.6em;
       bottom: 0.65em;
       width: 0.9rem;
-      fill: var(--color-grey-7);
+      fill: var(--color-secondary-7);
       transition: all 0.2s;
     }
   }

@@ -11,7 +11,7 @@
   &__header {
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
-    background-color: var(--color-blue-7);
+    background-color: var(--color-primary-7);
 
     &.table-loader__row {
       .line {
@@ -38,7 +38,7 @@
       display: block;
       height: 0.8em;
       border-radius: 6px;
-      background-color: var(--color-grey-9);
+      background-color: var(--color-secondary-9);
       position: relative;
       overflow: hidden;
       will-change: auto;
