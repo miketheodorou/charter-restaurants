@@ -22,6 +22,38 @@
       color: var(--color-primary-7);
       font-weight: bold;
       font-size: 0.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow-md);
+      border: 1px solid var(--color-secondary-4);
+      transition: all 0.2s;
+      outline: none;
+
+      &:hover,
+      &:focus {
+        border-color: var(--color-primary-7);
+
+        .icon {
+          fill: var(--color-primary-7);
+        }
+      }
+
+      &:disabled {
+        border-color: transparent;
+        .icon {
+          fill: var(--color-secondary-3);
+        }
+      }
+
+      .icon {
+        fill: var(--color-secondary-7);
+        width: 1.4em;
+      }
+
+      &--edge {
+        .icon {
+          width: 1em;
+        }
+      }
     }
   }
 }

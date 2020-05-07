@@ -1,6 +1,11 @@
 import React, { FC } from 'react';
 import './TablePagination.scss';
+
+// Models
 import { Pagination } from '../../../models/Pagination.model';
+
+// Icons
+import { CaretIcon } from '../../../assets/icons';
 
 interface Props {
   pagination: Pagination;
@@ -39,30 +44,28 @@ const TablePagination: FC<Props> = (props) => {
         <button
           disabled={page === 1}
           onClick={() => onPageChanged(1)}
-          className='control'
+          className='control control--edge'
         >
-          {'<<'}
+          <CaretIcon direction='left' />
+          <CaretIcon direction='left' />
         </button>
-        <button
-          disabled={page === 1}
-          onClick={() => onPageChanged(page - 1)}
-          className='control'
-        >
-          {'<'}
+        <button disabled={page === 1} onClick={() => onPageChanged(page - 1)} className='control'>
+          <CaretIcon direction='left' />
         </button>
         <button
           disabled={page === totalPages}
           onClick={() => onPageChanged(page + 1)}
           className='control'
         >
-          {'>'}
+          <CaretIcon direction='right' />
         </button>
         <button
           disabled={page === totalPages}
           onClick={() => onPageChanged(totalPages)}
-          className='control'
+          className='control control--edge'
         >
-          {'>>'}
+          <CaretIcon direction='right' />
+          <CaretIcon direction='right' />
         </button>
       </div>
     </div>
