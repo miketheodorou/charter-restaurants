@@ -10,9 +10,20 @@
     font-size: 0.8rem;
     transition: all 0.2s;
 
+    &::-webkit-input-placeholder,
+    &::-webkit-input-placeholder {
+      color: var(--color-grey-7);
+      transition: all 0.2s;
+    }
+
     &:focus {
       outline: none;
       border-color: var(--color-blue-6);
+
+      &::-webkit-input-placeholder,
+      &::placeholder {
+        color: var(--color-grey-9);
+      }
     }
   }
 
@@ -20,13 +31,20 @@
     .input__field {
       width: calc(100% - 3.2em);
       padding-left: 2.2em;
+
+      &:focus + .icon {
+        fill: var(--color-grey-9);
+      }
     }
 
     .icon {
+      opacity: 0.6;
       position: absolute;
       left: 0.6em;
       bottom: 0.65em;
       width: 0.9rem;
+      fill: var(--color-grey-7);
+      transition: all 0.2s;
     }
   }
 }

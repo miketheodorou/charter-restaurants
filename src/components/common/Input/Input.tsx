@@ -29,7 +29,6 @@ const Input: FC<Props> = (props) => {
   } = props;
   return (
     <div className={`input ${className || ''}`}>
-      {icon}
       <label className='input__label' htmlFor={name}>
         {label}
       </label>
@@ -43,6 +42,7 @@ const Input: FC<Props> = (props) => {
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
+      {icon}
     </div>
   );
 };
