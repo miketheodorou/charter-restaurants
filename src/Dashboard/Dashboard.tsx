@@ -52,7 +52,7 @@ const Dashboard = () => {
     if (status !== 'loading') {
       state.filteredRestaurants.length > 0 ? setStatus('success') : setStatus('empty');
     }
-  }, [state]);
+  }, [status, state.filteredRestaurants]);
 
   return (
     <section className='dashboard'>

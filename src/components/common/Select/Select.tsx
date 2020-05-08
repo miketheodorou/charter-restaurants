@@ -18,17 +18,7 @@ interface Props {
 }
 
 const Select: FC<Props> = (props) => {
-  const {
-    className,
-    items,
-    name,
-    label,
-    value,
-    required,
-    onSelect,
-    optionLabel,
-    optionValue,
-  } = props;
+  const { className, items, name, label, value, onSelect, optionLabel, optionValue } = props;
   const [expanded, setExpanded] = useState<boolean>(false);
   const [node, setNode] = useState<HTMLDivElement | any>(null);
 
@@ -86,13 +76,12 @@ const Select: FC<Props> = (props) => {
     ];
   };
 
-  // closes the select menu when clicking outside of it
-  const handleClickOutside = (event: any) => {
-    if (node?.contains(event.target)) return;
-    setExpanded(false);
-  };
-
   useEffect(() => {
+    // closes the select menu when clicking outside of it
+    const handleClickOutside = (event: any) => {
+      if (node?.contains(event.target)) return;
+      setExpanded(false);
+    };
     if (expanded) {
       document.addEventListener('mousedown', handleClickOutside, false);
     }
@@ -100,7 +89,7 @@ const Select: FC<Props> = (props) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside, false);
     };
-  }, [expanded]);
+  }, [expanded, node]);
 
   return (
     <div className={`select ${className}`} ref={(node: HTMLDivElement) => setNode(node)}>

@@ -1,4 +1,4 @@
-import React, { useReducer, FormEvent, FC, useEffect } from 'react';
+import React, { FormEvent, FC, useState } from 'react';
 import './Search.scss';
 
 // Icons
@@ -6,33 +6,15 @@ import { SearchIcon, FilterIcon } from '../../assets/icons';
 
 // Models
 import { Searchparams } from '../../models/SearchParams';
-import { Action } from '../../models/Action.model';
 
 // Components
 import Input from '../common/Input/Input';
 import Filters from '../Filters/Filters';
 
-// Action Types
-import { SEARCH_TERM_CHANGED, FILTER_CHANGED } from './actionTypes';
-
-const initialState = {
-  term: '',
-  filters: {
-    state: null,
-    genre: null,
-    attire: null,
-  },
-};
-
-const reducer = (state: Searchparams = initialState, { type, payload }: Action) => {
-  switch (type) {
-    case SEARCH_TERM_CHANGED:
-      return { ...state, term: payload };
-    case FILTER_CHANGED:
-      return { ...state, filters: { ...state.filters, [payload.field]: payload.value } };
-    default:
-      return state;
-  }
+const intialFilters = {
+  state: null,
+  genre: null,
+  attire: null,
 };
 
 interface Props {
@@ -41,35 +23,25 @@ interface Props {
 
 const Search: FC<Props> = (props) => {
   const { onSearch } = props;
-  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const [term, setTerm] = useState<string>('');
+  const [filters, setFilters] = useState<any>(intialFilters);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSearch(state);
+    onSearch({ term, filters });
   };
 
   const onSearchTermChanged = (term: any) => {
-    dispatch({ type: SEARCH_TERM_CHANGED, payload: term });
+    if (term.length === 0) onSearch({ term, filters });
+    setTerm(term);
   };
 
   const onFilterSelected = (filter: { field: string; value: string }) => {
-    dispatch({ type: FILTER_CHANGED, payload: filter });
+    const updatedFilters = { ...filters, [filter.field]: filter.value };
+    onSearch({ term, filters: updatedFilters });
+    setFilters(updatedFilters);
   };
-
-  useEffect(() => {
-    onSearch(state);
-    // TODO: Figure out a way to handle this case
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.filters]);
-
-  // // fires new filter when backspacing until input is empty
-  useEffect(() => {
-    if (state.term.length === 0) {
-      onSearch(state);
-    }
-    // TODO: Figure out a way to handle this case
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.term]);
 
   return (
     <form className='search' onSubmit={handleSubmit}>
@@ -87,7 +59,7 @@ const Search: FC<Props> = (props) => {
               name='search'
               id='search'
               placeholder='Search by name, city or genre'
-              value={state.term}
+              value={term}
               onChange={onSearchTermChanged}
               icon={<SearchIcon />}
             />
@@ -103,7 +75,7 @@ const Search: FC<Props> = (props) => {
           <h2 className='title'>Filters</h2>
         </header>
         <div className='panel__body'>
-          <Filters onSelect={onFilterSelected} filters={state.filters} />
+          <Filters onSelect={onFilterSelected} filters={filters} />
         </div>
       </div>
     </form>
