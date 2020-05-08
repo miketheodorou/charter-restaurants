@@ -6,7 +6,8 @@
   box-shadow: var(--box-shadow-lg);
   position: relative;
   background-color: #fff;
-  animation: fade-in 0.2s linear forwards;
+  opacity: 0;
+  animation: fade-in 0.2s linear 0.2s forwards;
 
   &__header {
     border-top-left-radius: inherit;

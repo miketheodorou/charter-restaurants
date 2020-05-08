@@ -7,6 +7,7 @@
   border-radius: inherit;
   opacity: 0;
   animation: fade-in 0.3s linear forwards;
+  box-shadow: var(--box-shadow-lg);
 
   &__container {
     overflow-x: auto;
@@ -60,8 +61,6 @@
   }
 
   &__footer {
-    opacity: 0;
-    animation: fade-in 0.3s linear forwards;
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -71,5 +70,8 @@
     box-shadow: var(--box-shadow-lg);
     position: relative;
     z-index: 5;
+    box-shadow: var(--box-shadow-lg);
+    opacity: 0;
+    animation: fade-in 0.3s linear forwards;
   }
 }

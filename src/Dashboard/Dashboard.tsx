@@ -1,9 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import './Dashboard.scss';
 
-// Models
-import { Searchparams } from '../models/SearchParams';
-
 // Context
 import { RestaurantContext } from '../context/RestaurantContext/RestaurantContext';
 
@@ -14,7 +11,7 @@ import TableEmpty from '../components/Table/TableEmpty/TableEmpty';
 import TableLoader from '../components/Table/TableLoader/TableLoader';
 
 const Dashboard = () => {
-  const { fetchRestaurants, state, search } = useContext(RestaurantContext);
+  const { state, fetchRestaurants } = useContext(RestaurantContext);
   const [status, setStatus] = useState<string>('loading');
   const [error, setError] = useState<string>('');
 
@@ -22,10 +19,6 @@ const Dashboard = () => {
   const handleFetchError = (error: { message: string }) => {
     setError(error.message);
     setStatus('error');
-  };
-
-  const onSearch = (searchParams: Searchparams) => {
-    search(searchParams);
   };
 
   const getRestaurants = () => {
@@ -39,10 +32,8 @@ const Dashboard = () => {
         return <TableLoader />;
       case 'error':
         return <TableEmpty error={error} tryAgain={getRestaurants} />;
-      case 'empty':
-        return <TableEmpty />;
       case 'success':
-        return <Table restaurants={state.filteredRestaurants} />;
+        return state.filteredRestaurants.length ? <Table /> : <TableEmpty />;
       default:
         return null;
     }
@@ -51,11 +42,6 @@ const Dashboard = () => {
   useEffect(() => {
     getRestaurants();
   }, []);
-
-  useEffect(() => {
-    if (status === 'error' || status === 'loading') return;
-    state.filteredRestaurants.length > 0 ? setStatus('success') : setStatus('empty');
-  }, [status, state.filteredRestaurants]);
 
   return (
     <section className='dashboard'>

@@ -1,19 +1,20 @@
 import React, { FC, useContext, useState, useEffect } from 'react';
 import './Table.scss';
+
+// Models
 import { Restaurant } from '../../models/Restaurant.model';
-import TableRow from './TableRow/TableRow';
-import { RestaurantContext } from '../../context/RestaurantContext/RestaurantContext';
-import TablePagination from './TablePagination/TablePagination';
 import { Pagination } from '../../models/Pagination.model';
 
-interface Props {
-  restaurants: Restaurant[];
-}
+// Context
+import { RestaurantContext } from '../../context/RestaurantContext/RestaurantContext';
 
-const Table: FC<Props> = (props) => {
-  const { restaurants } = props;
+// Components
+import TablePagination from './TablePagination/TablePagination';
+import TableRow from './TableRow/TableRow';
+
+const Table: FC = () => {
   const { state, pageChanged } = useContext(RestaurantContext);
-  const { pagination } = state;
+  const { filteredRestaurants, pagination } = state;
   const [results, setResults] = useState<Restaurant[]>([]);
   const [activeRow, setActiveRow] = useState<number | null>(null);
 
@@ -43,8 +44,8 @@ const Table: FC<Props> = (props) => {
 
   useEffect(() => {
     setActiveRow(null);
-    parsePages(restaurants, pagination);
-  }, [restaurants, pagination]);
+    parsePages(filteredRestaurants, pagination);
+  }, [filteredRestaurants, pagination]);
 
   return (
     <>
