@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useCallback } from 'react';
 import './Select.scss';
 
 // Icons
@@ -18,9 +18,9 @@ interface Props {
 }
 
 const Select: FC<Props> = (props) => {
-  const { className, items, name, label, value, onSelect, optionLabel, optionValue } = props;
+  const { className = '', items, name, label, value, onSelect, optionLabel, optionValue } = props;
   const [expanded, setExpanded] = useState<boolean>(false);
-  const [node, setNode] = useState<HTMLDivElement | any>(null);
+  const [node, setNode] = useState<HTMLDivElement | any>(null); // for handling click outside to close
 
   const onOptionSelcted = (item: any = '') => {
     // if no item passed in, assume the "all" was selected
@@ -39,10 +39,6 @@ const Select: FC<Props> = (props) => {
         {renderItems(items)}
       </ul>
     );
-  };
-
-  const isSelected = (value: any, item: any, optionValue: string | undefined) => {
-    return optionValue ? value === item[optionValue] : value === item.value;
   };
 
   const renderItems = (items: any[]) => {
@@ -76,27 +72,33 @@ const Select: FC<Props> = (props) => {
     ];
   };
 
-  useEffect(() => {
-    // closes the select menu when clicking outside of it
-    const handleClickOutside = (event: any) => {
+  // handle checkmark rendering / active styling
+  const isSelected = (value: any, item: any, optionValue: string | undefined) => {
+    return optionValue ? value === item[optionValue] : value === item.value;
+  };
+
+  // closes the select menu when clicking outside of it
+  const handleClickOutside = useCallback(
+    (event: any) => {
       if (node?.contains(event.target)) return;
       setExpanded(false);
-    };
-    if (expanded) {
-      document.addEventListener('mousedown', handleClickOutside, false);
-    }
+    },
+    [node]
+  );
+
+  useEffect(() => {
+    if (expanded) document.addEventListener('mousedown', handleClickOutside, false);
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside, false);
     };
-  }, [expanded, node]);
+  }, [expanded, handleClickOutside]);
 
   return (
     <div className={`select ${className}`} ref={(node: HTMLDivElement) => setNode(node)}>
       <label htmlFor={name} className='select__label'>
         {label}
       </label>
-
       <button
         aria-haspopup='listbox'
         aria-labelledby='select__input'

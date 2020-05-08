@@ -16,6 +16,7 @@ const Filters: FC = () => {
   const { searchParams } = state;
   const { filters } = searchParams;
 
+  // makes search with new filter applied -- reducer in context handles the value update for component
   const onFilterSelected = (filter: Filter) => {
     const updatedFilters = { ...filters, [filter.field]: filter.value };
     search({ ...searchParams, filters: updatedFilters });

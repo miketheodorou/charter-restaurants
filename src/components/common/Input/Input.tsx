@@ -16,7 +16,7 @@ interface Props {
 
 const Input: FC<Props> = (props) => {
   const {
-    className,
+    className = '',
     type,
     label,
     name,
@@ -28,7 +28,7 @@ const Input: FC<Props> = (props) => {
     onChange,
   } = props;
   return (
-    <div className={`input ${className || ''}`}>
+    <div className={`input ${className}`}>
       <label className='input__label' htmlFor={name}>
         {label}
       </label>

@@ -38,7 +38,7 @@ const TablePagination: FC<Props> = (props) => {
       <div className='pagination__counts'>
         {renderCounts()}
         <span className='count total'>{totalItems}</span>
-        <span className='results'>results</span>
+        <span className='results'>result{totalItems !== 1 ? 's' : ''}</span>
       </div>
       <div className='pagination__controls'>
         <button
