@@ -48,7 +48,8 @@
     th {
       text-align: left;
 
-      &.state {
+      &.state,
+      &.phone {
         text-align: center;
       }
 
