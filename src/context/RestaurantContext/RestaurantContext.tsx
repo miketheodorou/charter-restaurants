@@ -1,5 +1,8 @@
 import React, { useReducer, createContext, Dispatch } from 'react';
 
+// API
+import { getRestaurants } from '../../api/restaurantApi';
+
 // Action Types
 import { FETCH_SUCCESS, PAGE_CHANGED, ON_SEARCH } from './actionTypes';
 
@@ -17,6 +20,7 @@ interface RestaurantContextProps {
     filteredRestaurants: Restaurant[];
   };
   dispatch: Dispatch<Action>;
+  fetchRestaurants: () => Promise<Restaurant[]>;
   fetchRestaurantsSuccess: (restaurants: Restaurant[]) => void;
   pageChanged: (page: number) => void;
   search: (searchParams: Searchparams) => void;
@@ -59,6 +63,18 @@ export const RestaurantProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // fetches initial list of restaurants
+  const fetchRestaurants = () => {
+    return new Promise<Restaurant[]>(async (resolve, reject) => {
+      try {
+        const restaurants = await getRestaurants();
+        fetchRestaurantsSuccess(restaurants);
+        return resolve(restaurants);
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  };
+
   const fetchRestaurantsSuccess = (restaurants: Restaurant[]): void => {
     const filteredRestaurants = restaurants;
     const pagination = {
@@ -127,6 +143,7 @@ export const RestaurantProvider = ({ children }: any) => {
   const value = {
     state,
     dispatch,
+    fetchRestaurants,
     fetchRestaurantsSuccess,
     pageChanged,
     search,

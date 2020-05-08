@@ -1,12 +1,8 @@
 import React, { useEffect, useContext, useState } from 'react';
 import './Dashboard.scss';
 
-// API
-import { getRestaurants } from '../api/restaurantApi';
-
 // Models
 import { Searchparams } from '../models/SearchParams';
-import { Restaurant } from '../models/Restaurant.model';
 
 // Context
 import { RestaurantContext } from '../context/RestaurantContext/RestaurantContext';
@@ -18,22 +14,31 @@ import TableEmpty from '../components/Table/TableEmpty/TableEmpty';
 import TableLoader from '../components/Table/TableLoader/TableLoader';
 
 const Dashboard = () => {
-  const { fetchRestaurantsSuccess, state, search } = useContext(RestaurantContext);
+  const { fetchRestaurants, state, search } = useContext(RestaurantContext);
   const [status, setStatus] = useState<string>('loading');
+  const [error, setError] = useState<string>('');
 
-  const handleFetchSuccess = (restaurants: Restaurant[]) => {
-    setStatus('success');
-    fetchRestaurantsSuccess(restaurants);
+  const handleFetchSuccess = () => setStatus('success');
+  const handleFetchError = (error: { message: string }) => {
+    setError(error.message);
+    setStatus('error');
   };
 
   const onSearch = (searchParams: Searchparams) => {
     search(searchParams);
   };
 
+  const getRestaurants = () => {
+    setStatus('loading');
+    fetchRestaurants().then(handleFetchSuccess).catch(handleFetchError);
+  };
+
   const renderStatus = (status: string) => {
     switch (status) {
       case 'loading':
         return <TableLoader />;
+      case 'error':
+        return <TableEmpty error={error} tryAgain={getRestaurants} />;
       case 'empty':
         return <TableEmpty />;
       case 'success':
@@ -44,14 +49,12 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    setStatus('loading');
-    getRestaurants().then(handleFetchSuccess).catch(console.error);
+    getRestaurants();
   }, []);
 
   useEffect(() => {
-    if (status !== 'loading') {
-      state.filteredRestaurants.length > 0 ? setStatus('success') : setStatus('empty');
-    }
+    if (status === 'error' || status === 'loading') return;
+    state.filteredRestaurants.length > 0 ? setStatus('success') : setStatus('empty');
   }, [status, state.filteredRestaurants]);
 
   return (
