@@ -38,8 +38,8 @@
     display: grid;
     grid-template-columns: 1fr 200px 175px 150px 1fr 150px;
 
-    td {
-      padding: 1.15em;
+    td:not(.detail-view) {
+      padding: 1.5em;
       font-size: 0.85rem;
       text-transform: capitalize;
     }

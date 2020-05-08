@@ -15,10 +15,21 @@ const Table: FC<Props> = (props) => {
   const { state, pageChanged } = useContext(RestaurantContext);
   const { pagination } = state;
   const [results, setResults] = useState<Restaurant[]>([]);
+  const [activeRow, setActiveRow] = useState<number | null>(null);
+
+  const onRowClick = (index: number) => {
+    return activeRow !== index ? setActiveRow(index) : setActiveRow(null);
+  };
 
   const renderRestaurants = (restaurants: Restaurant[]) => {
-    return restaurants.map((restaurant) => (
-      <TableRow key={restaurant.id} restaurant={restaurant} />
+    return restaurants.map((restaurant, i) => (
+      <TableRow
+        key={restaurant.id}
+        restaurant={restaurant}
+        expanded={activeRow === i}
+        index={i}
+        onClick={onRowClick}
+      />
     ));
   };
 
@@ -31,6 +42,7 @@ const Table: FC<Props> = (props) => {
   };
 
   useEffect(() => {
+    setActiveRow(null);
     parsePages(restaurants, pagination);
   }, [restaurants, pagination]);
 
