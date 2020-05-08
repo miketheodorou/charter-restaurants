@@ -114,6 +114,7 @@ const Select: FC<Props> = (props) => {
         id={name}
         className='select__input'
         onClick={() => setExpanded(!expanded)}
+        type='button'
       >
         <span className='selected'>{value || 'All'}</span>
         <CaretIcon direction='down' className={expanded ? 'icon-caret--up' : ''} />

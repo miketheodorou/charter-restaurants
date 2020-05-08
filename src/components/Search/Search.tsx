@@ -58,7 +58,18 @@ const Search: FC<Props> = (props) => {
 
   useEffect(() => {
     onSearch(state);
+    // TODO: Figure out a way to handle this case
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.filters]);
+
+  // // fires new filter when backspacing until input is empty
+  useEffect(() => {
+    if (state.term.length === 0) {
+      onSearch(state);
+    }
+    // TODO: Figure out a way to handle this case
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.term]);
 
   return (
     <form className='search' onSubmit={handleSubmit}>
