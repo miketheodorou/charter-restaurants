@@ -13,7 +13,7 @@ const TableEmpty = () => {
           <p className='no-results__message'>
             We couldn't find any results matching that criteria.
           </p>
-          <small className='no-results__sub-message'>Please try narrowing your search.</small>
+          <small className='no-results__sub-message'>Please try expanding your search.</small>
         </article>
       </div>
     </div>

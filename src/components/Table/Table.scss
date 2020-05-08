@@ -5,6 +5,8 @@
   position: relative;
   background-color: #fff;
   border-radius: inherit;
+  opacity: 0;
+  animation: fade-in 0.3s linear forwards;
 
   &__container {
     overflow-x: auto;
@@ -57,6 +59,8 @@
   }
 
   &__footer {
+    opacity: 0;
+    animation: fade-in 0.3s linear forwards;
     background-color: #fff;
     display: flex;
     align-items: center;
