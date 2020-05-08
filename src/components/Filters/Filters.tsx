@@ -1,29 +1,25 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import './Filters.scss';
 import { states, genres, attire } from './options';
 
 // Components
 import Select from '../common/Select/Select';
-
-interface State {
-  name: string;
-  abbreviation: string;
-}
+import { RestaurantContext } from '../../context/RestaurantContext/RestaurantContext';
 
 interface Filter {
   field: string;
   value: any;
 }
 
-interface Props {
-  filters: {
-    [key: string]: any;
-  };
-  onSelect: (filter: Filter) => void;
-}
+const Filters: FC = () => {
+  const { state, search } = useContext(RestaurantContext);
+  const { searchParams } = state;
+  const { filters } = searchParams;
 
-const Filters: FC<Props> = (props) => {
-  const { filters, onSelect } = props;
+  const onFilterSelected = (filter: Filter) => {
+    const updatedFilters = { ...filters, [filter.field]: filter.value };
+    search({ ...searchParams, filters: updatedFilters });
+  };
 
   return (
     <div className='filters'>
@@ -35,7 +31,7 @@ const Filters: FC<Props> = (props) => {
         optionLabel='abbreviation'
         optionValue='abbreviation'
         value={filters.state}
-        onSelect={(value) => onSelect({ field: 'state', value })}
+        onSelect={(value) => onFilterSelected({ field: 'state', value })}
       />
       <Select
         className='filters__filter genre'
@@ -43,7 +39,7 @@ const Filters: FC<Props> = (props) => {
         name='genre'
         label='Genre'
         value={filters.genre}
-        onSelect={(value) => onSelect({ field: 'genre', value })}
+        onSelect={(value) => onFilterSelected({ field: 'genre', value })}
       />
 
       <Select
@@ -52,7 +48,7 @@ const Filters: FC<Props> = (props) => {
         name='attire'
         label='Attire'
         value={filters.attire}
-        onSelect={(value) => onSelect({ field: 'attire', value })}
+        onSelect={(value) => onFilterSelected({ field: 'attire', value })}
       />
     </div>
   );

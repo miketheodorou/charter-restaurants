@@ -1,46 +1,28 @@
-import React, { FormEvent, FC, useState } from 'react';
+import React, { FormEvent, FC, useContext } from 'react';
 import './Search.scss';
 
 // Icons
 import { SearchIcon, FilterIcon } from '../../assets/icons';
 
-// Models
-import { Searchparams } from '../../models/SearchParams';
+// Context
+import { RestaurantContext } from '../../context/RestaurantContext/RestaurantContext';
 
 // Components
 import Input from '../common/Input/Input';
 import Filters from '../Filters/Filters';
 
-const intialFilters = {
-  state: null,
-  genre: null,
-  attire: null,
-};
-
-interface Props {
-  onSearch: (searchparams: Searchparams) => void;
-}
-
-const Search: FC<Props> = (props) => {
-  const { onSearch } = props;
-
-  const [term, setTerm] = useState<string>('');
-  const [filters, setFilters] = useState<any>(intialFilters);
+const Search: FC = () => {
+  const { state, searchTermChanged, search } = useContext(RestaurantContext);
+  const { searchParams } = state;
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSearch({ term, filters });
+    search(searchParams);
   };
 
   const onSearchTermChanged = (term: any) => {
-    if (term.length === 0) onSearch({ term, filters });
-    setTerm(term);
-  };
-
-  const onFilterSelected = (filter: { field: string; value: string }) => {
-    const updatedFilters = { ...filters, [filter.field]: filter.value };
-    onSearch({ term, filters: updatedFilters });
-    setFilters(updatedFilters);
+    if (term.length === 0) search({ ...searchParams, term });
+    searchTermChanged(term);
   };
 
   return (
@@ -59,7 +41,7 @@ const Search: FC<Props> = (props) => {
               name='search'
               id='search'
               placeholder='Search by name, city or genre'
-              value={term}
+              value={searchParams.term}
               onChange={onSearchTermChanged}
               icon={<SearchIcon />}
             />
@@ -75,7 +57,7 @@ const Search: FC<Props> = (props) => {
           <h2 className='title'>Filters</h2>
         </header>
         <div className='panel__body'>
-          <Filters onSelect={onFilterSelected} filters={filters} />
+          <Filters />
         </div>
       </div>
     </form>

@@ -61,7 +61,7 @@ const Dashboard = () => {
     <section className='dashboard'>
       <h1 className='dashboard__title'>Restaurants</h1>
       <section className='restaurants'>
-        <Search onSearch={onSearch} />
+        <Search />
         <div className='restaurants__results'>{renderStatus(status)}</div>
       </section>
     </section>

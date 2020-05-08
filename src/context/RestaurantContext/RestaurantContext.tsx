@@ -4,7 +4,7 @@ import React, { useReducer, createContext, Dispatch } from 'react';
 import { getRestaurants } from '../../api/restaurantApi';
 
 // Action Types
-import { FETCH_SUCCESS, PAGE_CHANGED, ON_SEARCH } from './actionTypes';
+import { FETCH_SUCCESS, ON_SEARCH, SEARCH_TERM_CHANGED, PAGE_CHANGED } from './actionTypes';
 
 // Models
 import { Action } from '../../models/Action.model';
@@ -22,8 +22,9 @@ interface RestaurantContextProps {
   dispatch: Dispatch<Action>;
   fetchRestaurants: () => Promise<Restaurant[]>;
   fetchRestaurantsSuccess: (restaurants: Restaurant[]) => void;
-  pageChanged: (page: number) => void;
   search: (searchParams: Searchparams) => void;
+  searchTermChanged: (term: string) => void;
+  pageChanged: (page: number) => void;
 }
 
 export const RestaurantContext = createContext({} as RestaurantContextProps);
@@ -50,10 +51,12 @@ const reducer = (state = initialState, { type, payload }: Action) => {
   switch (type) {
     case FETCH_SUCCESS:
       return { ...state, ...payload };
-    case PAGE_CHANGED:
-      return { ...state, pagination: payload };
     case ON_SEARCH:
       return { ...state, ...payload };
+    case SEARCH_TERM_CHANGED:
+      return { ...state, searchParams: { ...state.searchParams, term: payload } };
+    case PAGE_CHANGED:
+      return { ...state, pagination: payload };
     default:
       return state;
   }
@@ -85,12 +88,6 @@ export const RestaurantProvider = ({ children }: any) => {
     };
     const payload = { restaurants, filteredRestaurants, pagination };
     dispatch({ type: FETCH_SUCCESS, payload });
-  };
-
-  // pagination for table footer
-  const pageChanged = (page: number) => {
-    const pagination = { ...state.pagination, page };
-    dispatch({ type: PAGE_CHANGED, payload: pagination });
   };
 
   const search = (searchParams: Searchparams) => {
@@ -137,7 +134,17 @@ export const RestaurantProvider = ({ children }: any) => {
       totalItems: filteredRestaurants.length,
     };
 
-    dispatch({ type: ON_SEARCH, payload: { filteredRestaurants, pagination } });
+    dispatch({ type: ON_SEARCH, payload: { searchParams, filteredRestaurants, pagination } });
+  };
+
+  const searchTermChanged = (term: string) => {
+    return dispatch({ type: SEARCH_TERM_CHANGED, payload: term });
+  };
+
+  // pagination for table footer
+  const pageChanged = (page: number) => {
+    const pagination = { ...state.pagination, page };
+    dispatch({ type: PAGE_CHANGED, payload: pagination });
   };
 
   const value = {
@@ -145,6 +152,7 @@ export const RestaurantProvider = ({ children }: any) => {
     dispatch,
     fetchRestaurants,
     fetchRestaurantsSuccess,
+    searchTermChanged,
     pageChanged,
     search,
   };
