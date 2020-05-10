@@ -7,7 +7,6 @@
     cursor: pointer;
     outline: none;
     transition: all 0.2s;
-    padding-bottom: 0.5em;
     overflow: hidden;
 
     &[aria-expanded='false'] {
@@ -19,11 +18,13 @@
 
     // Expanded Menu
     &[aria-expanded='true'] {
+      cursor: default;
       &:focus {
         border-bottom: 2px solid var(--color-primary-7);
       }
       .detail-view {
-        height: 200px;
+        height: 120px;
+        padding-top: 1em;
         opacity: 1;
       }
     }
@@ -38,14 +39,6 @@
         white-space: nowrap;
         overflow: hidden;
       }
-    }
-
-    .detail-view {
-      height: 0px;
-      opacity: 0;
-      width: 100%;
-      grid-column: 1 / -1;
-      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
   }
 }

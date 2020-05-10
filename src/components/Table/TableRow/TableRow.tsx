@@ -31,7 +31,7 @@ const TableRow: FC<Props> = ({ restaurant, expanded, onClick, index }: Props) =>
       <td className='phone'>{telephone}</td>
       <td className='genres'>{genre.replace(/,/g, ', ')}</td>
       <td>{attire}</td>
-      <TableDetail restaurant={restaurant} />
+      <TableDetail restaurant={restaurant} expanded={expanded} />
     </tr>
   );
 };

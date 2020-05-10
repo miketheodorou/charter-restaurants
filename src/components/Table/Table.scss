@@ -5,9 +5,6 @@
   position: relative;
   background-color: #fff;
   border-radius: inherit;
-  opacity: 0;
-  animation: fade-in 0.3s linear forwards;
-  box-shadow: var(--box-shadow-lg);
 
   &__container {
     overflow-x: auto;
@@ -40,7 +37,7 @@
     grid-template-columns: 1fr 200px 175px 150px 1fr 150px;
 
     td:not(.detail-view) {
-      padding: 1.5em;
+      padding: 1.15em 1.5em;
       font-size: 0.85rem;
       text-transform: capitalize;
     }
@@ -66,12 +63,7 @@
     align-items: center;
     justify-content: flex-end;
     padding: 1.5em 1em;
-    border-bottom: 0 none;
-    box-shadow: var(--box-shadow-lg);
     position: relative;
     z-index: 5;
-    box-shadow: var(--box-shadow-lg);
-    opacity: 0;
-    animation: fade-in 0.3s linear forwards;
   }
 }

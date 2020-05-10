@@ -1,17 +1,55 @@
 .detail-view {
   padding: 0 1.15em;
-  .tags,
-  .address {
-    &:not(:last-child) {
-      margin-bottom: 0.8em;
-    }
+  height: 0px;
+  opacity: 0;
+  width: 100%;
+  grid-column: 1 / -1;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  display: grid;
+  grid-gap: 1em;
+  grid-template-areas: 'website tags address hours';
+  align-content: flex-start;
+
+  .section {
     &__title {
+      display: flex;
+      align-items: center;
       font-size: 0.9rem;
       margin-bottom: 0.4em;
+
+      .icon {
+        margin-right: 0.4em;
+        width: 0.8em;
+      }
     }
 
     &__text {
       font-size: 0.8rem;
+      margin-bottom: 0.4em;
     }
+  }
+
+  .tags {
+    grid-area: tags;
+  }
+
+  .address {
+    grid-area: address;
+
+    p {
+      margin-left: 0.2em;
+    }
+  }
+
+  .website {
+    grid-area: website;
+
+    .btn {
+      margin-top: 0.3em;
+      width: 90%;
+    }
+  }
+  .hours {
+    grid-area: hours;
   }
 }
