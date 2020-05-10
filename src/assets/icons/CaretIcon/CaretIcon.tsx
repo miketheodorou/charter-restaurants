@@ -7,11 +7,11 @@ interface Props {
 }
 
 const CaretIcon: FC<Props> = (props) => {
-  const { className, direction } = props;
+  const { className = '', direction } = props;
 
   return (
     <svg
-      className={`icon icon-caret icon-caret--${direction} ${className || ''}`}
+      className={`icon icon-caret icon-caret--${direction} ${className}`}
       width='16px'
       height='16px'
       x='0px'

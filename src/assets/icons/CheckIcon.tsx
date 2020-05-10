@@ -5,10 +5,10 @@ interface Props {
 }
 
 const CheckIcon: FC<Props> = (props) => {
-  const { className } = props;
+  const { className = '' } = props;
   return (
     <svg
-      className={`icon icon-check ${className || ''}`}
+      className={`icon icon-check ${className}`}
       width='16px'
       height='16px'
       x='0px'
