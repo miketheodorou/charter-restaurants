@@ -45,7 +45,7 @@ const Search: FC = () => {
               onChange={onSearchTermChanged}
               icon={<SearchIcon />}
             />
-            <button type='submit' className='btn btn--primary'>
+            <button type='submit' className='btn btn--primary search-bar__button'>
               Search
             </button>
           </div>
