@@ -7,7 +7,7 @@
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   display: grid;
   grid-gap: 1em;
-  grid-template-areas: 'website tags address hours';
+  grid-template-columns: 250px 370px 1fr 1fr;
   align-content: flex-start;
 
   .section {
@@ -29,27 +29,16 @@
     }
   }
 
-  .tags {
-    grid-area: tags;
-  }
-
   .address {
-    grid-area: address;
-
     p {
       margin-left: 0.2em;
     }
   }
 
   .website {
-    grid-area: website;
-
     .btn {
       margin-top: 0.3em;
-      width: 90%;
+      width: 95%;
     }
-  }
-  .hours {
-    grid-area: hours;
   }
 }

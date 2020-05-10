@@ -9,12 +9,21 @@
   box-shadow: var(--box-shadow-md);
   text-decoration: none;
   text-align: center;
+  transition: background-color 0.2s;
 
   &--primary {
     background-color: var(--color-primary-7);
+
+    &:hover {
+      background-color: var(--color-primary-8);
+    }
   }
 
   &--tertiary {
-    background-color: var(--color-tertiary);
+    background-color: var(--color-tertiary-7);
+
+    &:hover {
+      background-color: var(--color-tertiary-8);
+    }
   }
 }
