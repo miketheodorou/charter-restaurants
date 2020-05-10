@@ -1,0 +1,17 @@
+.detail-view {
+  padding: 0 1.15em;
+  .tags,
+  .address {
+    &:not(:last-child) {
+      margin-bottom: 0.8em;
+    }
+    &__title {
+      font-size: 0.9rem;
+      margin-bottom: 0.4em;
+    }
+
+    &__text {
+      font-size: 0.8rem;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import './TableRow.scss';
 import { Restaurant } from '../../../models/Restaurant.model';
+import TableDetail from '../TableDetail/TableDetail';
 
 interface Props {
   restaurant: Restaurant;
@@ -30,7 +31,7 @@ const TableRow: FC<Props> = ({ restaurant, expanded, onClick, index }: Props) =>
       <td className='phone'>{telephone}</td>
       <td className='genres'>{genre.replace(/,/g, ', ')}</td>
       <td>{attire}</td>
-      <td className='detail-view' colSpan={5}></td>
+      <TableDetail restaurant={restaurant} />
     </tr>
   );
 };
