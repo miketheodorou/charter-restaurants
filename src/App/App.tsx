@@ -4,7 +4,7 @@ import React from 'react';
 import { RestaurantProvider } from '../context/RestaurantContext/RestaurantContext';
 
 // Custom Components
-import Dashboard from '../Dashboard/Dashboard';
+import Dashboard from '../components/Dashboard/Dashboard';
 
 function App() {
   return (

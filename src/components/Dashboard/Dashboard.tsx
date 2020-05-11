@@ -2,13 +2,13 @@ import React, { useEffect, useContext, useState } from 'react';
 import './Dashboard.scss';
 
 // Context
-import { RestaurantContext } from '../context/RestaurantContext/RestaurantContext';
+import { RestaurantContext } from '../../context/RestaurantContext/RestaurantContext';
 
 // Components
-import Search from '../components/Search/Search';
-import Table from '../components/Table/Table';
-import TableEmpty from '../components/Table/TableEmpty/TableEmpty';
-import TableLoader from '../components/Table/TableLoader/TableLoader';
+import Search from '../Search/Search';
+import Table from '../Table/Table';
+import TableEmpty from '../Table/TableEmpty/TableEmpty';
+import TableLoader from '../Table/TableLoader/TableLoader';
 
 const Dashboard = () => {
   const { state, fetchRestaurants } = useContext(RestaurantContext);
@@ -23,7 +23,9 @@ const Dashboard = () => {
 
   const getRestaurants = () => {
     setStatus('loading');
-    fetchRestaurants().then(handleFetchSuccess).catch(handleFetchError);
+    fetchRestaurants()
+      .then(handleFetchSuccess)
+      .catch(handleFetchError);
   };
 
   const renderStatus = (status: string) => {
