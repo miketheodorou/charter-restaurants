@@ -108,7 +108,7 @@ export const RestaurantProvider = ({ children }: any) => {
 
     const filteredRestaurants = state.restaurants.filter((restaurant: Restaurant) => {
       // combines restaurant values to test with regex
-      const searchFields = ['name', 'city', 'state'];
+      const searchFields = ['name', 'city', 'genre'];
       const matchString = Object.keys(restaurant).reduce((acc: string, key: string) => {
         if (searchFields.includes(key)) acc += restaurant[key];
         return acc;
