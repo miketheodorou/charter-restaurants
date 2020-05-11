@@ -1,4 +1,6 @@
-# Restaurants Searching App to Demonstrate React and Frontend Skills
+# Restaurants Searching App
+<img width="1680" alt="Screen Shot 2020-05-11 at 1 22 40 AM" src="https://user-images.githubusercontent.com/22715776/81535078-5efe8400-9326-11ea-8677-f29f5ebaa269.png">
+
 
 ## Available Scripts
 
