@@ -3,8 +3,6 @@ import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 
 import Select from './Select';
-import './Select.scss';
-import '../../../styles/index.scss';
 
 export default {
   title: 'Select',

@@ -17,7 +17,14 @@ export default {
   title: 'Icons',
 };
 
-export const Caret = () => <CaretIcon direction='down' />;
+export const Carets = () => (
+  <>
+    <CaretIcon direction='up' />
+    <CaretIcon direction='down' />
+    <CaretIcon direction='left' />
+    <CaretIcon direction='right' />
+  </>
+);
 export const Check = () => <CheckIcon />;
 export const Filter = () => <FilterIcon />;
 export const Hours = () => <HoursIcon />;
