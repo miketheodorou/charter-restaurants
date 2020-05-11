@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 
@@ -21,7 +21,6 @@ export const baseProps = {
   ],
   name: 'Test',
   label: 'Test',
-  value: '',
 };
 
 export const actionProps = {
@@ -29,13 +28,12 @@ export const actionProps = {
 };
 
 export const Default = () => {
-  const [value, setValue] = useState('');
   return (
     <div>
       <p>Items:</p>
       <pre>{JSON.stringify(baseProps.items)}</pre>
       <div style={{ maxWidth: '200px' }}>
-        <Select {...baseProps} value={value} onSelect={setValue} />
+        <Select {...baseProps} {...actionProps} value={value} />
       </div>
     </div>
   );
@@ -61,12 +59,14 @@ const customOptionsProps = {
   optionValue: 'abbreviation',
 };
 
-export const CustomOptions = () => (
-  <div>
-    <p>Items:</p>
-    <pre>{JSON.stringify(customOptionsProps.items)}</pre>
-    <div style={{ maxWidth: '200px' }}>
-      <Select {...customOptionsProps} {...actionProps} />
+export const CustomOptions = () => {
+  return (
+    <div>
+      <p>Items:</p>
+      <pre>{JSON.stringify(customOptionsProps.items)}</pre>
+      <div style={{ maxWidth: '200px' }}>
+        <Select {...customOptionsProps} {...actionProps} />
+      </div>
     </div>
-  </div>
-);
+  );
+};

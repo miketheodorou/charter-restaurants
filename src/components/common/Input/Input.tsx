@@ -10,7 +10,7 @@ interface Props {
   placeholder?: string;
   required?: boolean;
   icon?: any;
-  value: any;
+  value?: any;
   onChange: (val: string | number) => void;
 }
 
