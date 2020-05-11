@@ -14,7 +14,7 @@ import './CaretIcon/CaretIcon.scss';
 import '../../../styles/index.scss';
 
 export default {
-  title: 'Icons',
+  title: 'Common/Icons',
 };
 
 export const Carets = () => (

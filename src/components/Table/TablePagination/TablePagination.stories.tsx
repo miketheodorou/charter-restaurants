@@ -4,11 +4,6 @@ import { withA11y } from '@storybook/addon-a11y';
 
 import TablePagination from './TablePagination';
 
-export default {
-  title: 'Table Pagination',
-  decorators: [withA11y],
-};
-
 export const Default = () => {
   const pagination = {
     page: 1,
@@ -17,4 +12,10 @@ export const Default = () => {
     totalItems: 38,
   };
   return <TablePagination pagination={pagination} onPageChanged={action('pageChanged')} />;
+};
+
+export default {
+  title: 'Table/Pagination',
+  component: Default,
+  decorators: [withA11y],
 };

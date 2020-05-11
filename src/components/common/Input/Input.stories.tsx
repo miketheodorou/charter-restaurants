@@ -6,7 +6,7 @@ import Input from './Input';
 import { SearchIcon } from '../Icons';
 
 export default {
-  title: 'Input',
+  title: 'Common/Input',
   component: Input,
   decorators: [withA11y],
   excludeStories: /.*Props$/,

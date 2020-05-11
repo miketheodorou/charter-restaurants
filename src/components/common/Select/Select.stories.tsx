@@ -5,7 +5,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import Select from './Select';
 
 export default {
-  title: 'Select',
+  title: 'Common/Select',
   component: Select,
   decorators: [withA11y],
   excludeStories: /.*Props$/,

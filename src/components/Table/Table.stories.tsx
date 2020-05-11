@@ -5,7 +5,7 @@ import TableEmpty from './TableEmpty/TableEmpty';
 import TableLoader from './TableLoader/TableLoader';
 
 export default {
-  title: 'Table States',
+  title: 'Table/States',
 };
 
 export const Empty = () => <TableEmpty />;
