@@ -90,6 +90,7 @@ export const RestaurantProvider = ({ children }: any) => {
     dispatch({ type: FETCH_SUCCESS, payload });
   };
 
+  // happens when clicking seach button / pressing enter in input / choosing a filter
   const search = (searchParams: Searchparams) => {
     const { term, filters } = searchParams;
 
@@ -137,14 +138,14 @@ export const RestaurantProvider = ({ children }: any) => {
     dispatch({ type: ON_SEARCH, payload: { searchParams, filteredRestaurants, pagination } });
   };
 
+  // input value changes in search bar
   const searchTermChanged = (term: string) => {
     return dispatch({ type: SEARCH_TERM_CHANGED, payload: term });
   };
 
   // pagination for table footer
   const pageChanged = (page: number) => {
-    const pagination = { ...state.pagination, page };
-    dispatch({ type: PAGE_CHANGED, payload: pagination });
+    dispatch({ type: PAGE_CHANGED, payload: { ...state.pagination, page } });
   };
 
   const value = {
