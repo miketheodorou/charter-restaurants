@@ -84,13 +84,14 @@ const TableDetail: FC<Props> = ({ restaurant, expanded }: Props) => {
           {renderHours(hours)}
         </div>
       </div>
-
-      <iframe
-        tabIndex={expanded ? 0 : -1}
-        className='map-view'
-        title='Retaurant Location Map'
-        src={`https://maps.google.com/maps?q=${lat},${long}&hl=es;z=14&zoom=50&output=embed`}
-      ></iframe>
+      {expanded ? (
+        <iframe
+          tabIndex={expanded ? 0 : -1}
+          className='map-view'
+          title='Retaurant Location Google Maps View'
+          src={`https://maps.google.com/maps?q=${lat},${long}&hl=es;z=14&zoom=50&output=embed`}
+        ></iframe>
+      ) : null}
     </td>
   );
 };
