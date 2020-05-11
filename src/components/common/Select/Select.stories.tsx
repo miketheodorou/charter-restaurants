@@ -1,0 +1,72 @@
+import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
+import { withA11y } from '@storybook/addon-a11y';
+
+import Select from './Select';
+import './Select.scss';
+import '../../../styles/index.scss';
+
+export default {
+  title: 'Select',
+  component: Select,
+  decorators: [withA11y],
+  excludeStories: /.*Props$/,
+};
+
+export const baseProps = {
+  className: 'example-select',
+  items: [
+    { label: 'Test 1', value: 'Test 1' },
+    { label: 'Test 2', value: 'Test 2' },
+  ],
+  name: 'Test',
+  label: 'Test',
+  value: '',
+};
+
+export const actionProps = {
+  onSelect: action('onSelect'),
+};
+
+export const Default = () => {
+  const [value, setValue] = useState('');
+  return (
+    <div>
+      <p>Items:</p>
+      <pre>{JSON.stringify(baseProps.items)}</pre>
+      <div style={{ maxWidth: '200px' }}>
+        <Select {...baseProps} value={value} onSelect={setValue} />
+      </div>
+    </div>
+  );
+};
+
+const customOptionsProps = {
+  ...baseProps,
+  items: [
+    {
+      name: 'Alabama',
+      abbreviation: 'AL',
+    },
+    {
+      name: 'Alaska',
+      abbreviation: 'AK',
+    },
+    {
+      name: 'American Samoa',
+      abbreviation: 'AS',
+    },
+  ],
+  optionLabel: 'name',
+  optionValue: 'abbreviation',
+};
+
+export const CustomOptions = () => (
+  <div>
+    <p>Items:</p>
+    <pre>{JSON.stringify(customOptionsProps.items)}</pre>
+    <div style={{ maxWidth: '200px' }}>
+      <Select {...customOptionsProps} {...actionProps} />
+    </div>
+  </div>
+);

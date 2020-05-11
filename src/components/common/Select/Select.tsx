@@ -101,7 +101,7 @@ const Select: FC<Props> = (props) => {
       </label>
       <button
         aria-haspopup='listbox'
-        aria-labelledby='select__input'
+        aria-labelledby={name}
         id={name}
         className='select__input'
         onClick={() => setExpanded(!expanded)}
