@@ -28,5 +28,5 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 ### `yarn start`
 
-Creates a production build and serves the app from server.js on [http://localhost:8080] <br />
+Creates a production build and serves the app from the build folder <br />
 This script is being used to create and serve the app in heroku
