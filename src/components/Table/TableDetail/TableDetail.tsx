@@ -5,7 +5,7 @@ import './TableDetail.scss';
 import { Restaurant } from '../../../models/Restaurant.model';
 
 // Icons
-import { TagsIcon, MarkerIcon, HoursIcon } from '../../../assets/icons';
+import { TagsIcon, MarkerIcon, HoursIcon, MonitorIcon } from '../../../assets/icons';
 
 interface Props {
   restaurant: Restaurant;
@@ -43,6 +43,10 @@ const TableDetail: FC<Props> = ({ restaurant, expanded }: Props) => {
   return (
     <td className='detail-view' colSpan={5}>
       <div className='section website'>
+        <h3 className='section__title'>
+          <MonitorIcon />
+          Website
+        </h3>
         <a
           tabIndex={expanded ? 0 : -1}
           href={website}
@@ -50,6 +54,7 @@ const TableDetail: FC<Props> = ({ restaurant, expanded }: Props) => {
           target='_blank'
           rel='noopener noreferrer'
           className='btn btn--tertiary'
+          onClick={(e) => e.stopPropagation()}
         >
           Visit Website
         </a>
