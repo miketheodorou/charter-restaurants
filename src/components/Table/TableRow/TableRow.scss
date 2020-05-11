@@ -8,20 +8,13 @@
     outline: none;
     transition: all 0.2s;
     overflow: hidden;
-
-    &[aria-expanded='false'] {
-      &:hover,
-      &:focus {
-        background-color: var(--color-primary-1);
-      }
+    &:hover,
+    &:focus {
+      background-color: var(--color-primary-1);
     }
 
     // Expanded Menu
     &[aria-expanded='true'] {
-      cursor: default;
-      &:focus {
-        border-bottom: 2px solid var(--color-primary-7);
-      }
       .detail-view {
         height: 14em;
         padding-top: 1.5em;

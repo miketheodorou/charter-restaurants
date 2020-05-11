@@ -41,7 +41,7 @@ const TableDetail: FC<Props> = ({ restaurant, expanded }: Props) => {
   };
 
   return (
-    <td className='detail-view' colSpan={5}>
+    <td className='detail-view' colSpan={5} onClick={(e) => e.stopPropagation()}>
       <div className='grid'>
         <div className='section website'>
           <h3 className='section__title'>
@@ -55,7 +55,6 @@ const TableDetail: FC<Props> = ({ restaurant, expanded }: Props) => {
             target='_blank'
             rel='noopener noreferrer'
             className='btn btn--tertiary'
-            onClick={(e) => e.stopPropagation()}
           >
             Visit Website
           </a>

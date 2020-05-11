@@ -8,6 +8,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1.5em;
+  background-color: #fff;
+  cursor: default;
 
   .grid {
     display: grid;
