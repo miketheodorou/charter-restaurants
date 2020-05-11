@@ -10,7 +10,7 @@
   grid-template-areas:
     'tags tags hours hours'
     'address address hours hours'
-    'website website . .';
+    'website . . .';
   align-content: flex-start;
 
   .section {
@@ -43,7 +43,7 @@
   .website {
     grid-area: website;
     .btn {
-      width: 95%;
+      width: 100%;
     }
   }
 
