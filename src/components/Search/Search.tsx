@@ -2,7 +2,7 @@ import React, { FormEvent, FC, useContext } from 'react';
 import './Search.scss';
 
 // Icons
-import { SearchIcon, FilterIcon } from '../../assets/icons';
+import { SearchIcon, FilterIcon } from '../common/Icons';
 
 // Context
 import { RestaurantContext } from '../../context/RestaurantContext/RestaurantContext';

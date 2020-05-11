@@ -5,7 +5,7 @@ import './TableDetail.scss';
 import { Restaurant } from '../../../models/Restaurant.model';
 
 // Icons
-import { TagsIcon, MarkerIcon, HoursIcon, MonitorIcon } from '../../../assets/icons';
+import { TagsIcon, MarkerIcon, HoursIcon, MonitorIcon } from '../../common/Icons';
 
 interface Props {
   restaurant: Restaurant;

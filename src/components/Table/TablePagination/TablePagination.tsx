@@ -5,7 +5,7 @@ import './TablePagination.scss';
 import { Pagination } from '../../../models/Pagination.model';
 
 // Icons
-import { CaretIcon } from '../../../assets/icons';
+import { CaretIcon } from '../../common/Icons';
 
 interface Props {
   pagination: Pagination;

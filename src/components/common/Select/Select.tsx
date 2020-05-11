@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect, useCallback } from 'react';
 import './Select.scss';
 
 // Icons
-import { CheckIcon, CaretIcon } from '../../../assets/icons';
+import { CheckIcon, CaretIcon } from '../Icons';
 
 interface Props {
   className?: string;

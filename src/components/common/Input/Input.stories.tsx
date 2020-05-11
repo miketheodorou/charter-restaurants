@@ -5,7 +5,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import Input from './Input';
 import './Input.scss';
 import '../../../styles/index.scss';
-import { SearchIcon } from '../../../assets/icons';
+import { SearchIcon } from '../Icons';
 
 export default {
   title: 'Input',

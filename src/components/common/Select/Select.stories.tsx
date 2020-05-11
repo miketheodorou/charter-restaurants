@@ -33,7 +33,7 @@ export const Default = () => {
       <p>Items:</p>
       <pre>{JSON.stringify(baseProps.items)}</pre>
       <div style={{ maxWidth: '200px' }}>
-        <Select {...baseProps} {...actionProps} value={value} />
+        <Select {...baseProps} {...actionProps} />
       </div>
     </div>
   );
