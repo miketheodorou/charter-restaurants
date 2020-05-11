@@ -12,18 +12,18 @@
   transition: background-color 0.2s;
 
   &--primary {
-    background-color: var(--color-primary-7);
+    background-color: var(--color-primary-8);
 
     &:hover {
-      background-color: var(--color-primary-8);
+      background-color: var(--color-primary-7);
     }
   }
 
   &--tertiary {
-    background-color: var(--color-tertiary-7);
+    background-color: var(--color-tertiary-8);
 
     &:hover {
-      background-color: var(--color-tertiary-8);
+      background-color: var(--color-tertiary-7);
     }
   }
 }
