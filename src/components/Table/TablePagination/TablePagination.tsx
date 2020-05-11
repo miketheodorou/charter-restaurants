@@ -42,6 +42,7 @@ const TablePagination: FC<Props> = (props) => {
       </div>
       <div className='pagination__controls'>
         <button
+          aria-label='First Page'
           disabled={page === 1}
           onClick={() => onPageChanged(1)}
           className='control control--edge'
@@ -49,10 +50,16 @@ const TablePagination: FC<Props> = (props) => {
           <CaretIcon direction='left' />
           <CaretIcon direction='left' />
         </button>
-        <button disabled={page === 1} onClick={() => onPageChanged(page - 1)} className='control'>
+        <button
+          aria-label='Previous Page'
+          disabled={page === 1}
+          onClick={() => onPageChanged(page - 1)}
+          className='control'
+        >
           <CaretIcon direction='left' />
         </button>
         <button
+          aria-label='Next Page'
           disabled={page === totalPages}
           onClick={() => onPageChanged(page + 1)}
           className='control'
@@ -60,6 +67,7 @@ const TablePagination: FC<Props> = (props) => {
           <CaretIcon direction='right' />
         </button>
         <button
+          aria-label='Last Page'
           disabled={page === totalPages}
           onClick={() => onPageChanged(totalPages)}
           className='control control--edge'

@@ -87,9 +87,10 @@ const TableDetail: FC<Props> = ({ restaurant, expanded }: Props) => {
       </div>
 
       <iframe
+        tabIndex={expanded ? 0 : -1}
         className='map-view'
         title='Retaurant Location Map'
-        src={`https://maps.google.com/maps?q=${lat},${long}&hl=es;z=14&zoom=15&output=embed`}
+        src={`https://maps.google.com/maps?q=${lat},${long}&hl=es;z=14&zoom=50&output=embed`}
       ></iframe>
     </td>
   );
